@@ -1,5 +1,5 @@
 [project]
-name = "core-model"
+name = "hospital-readmission-prediction-and-analysis"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
