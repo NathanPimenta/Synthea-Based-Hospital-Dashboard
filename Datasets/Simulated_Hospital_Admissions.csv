@@ -1,0 +1,501 @@
+Patient_ID,Admission_Date,Discharge_Date,Age,Age_Group,Gender,Condition_Type,Department,Severity_Score,Length_of_Stay,Insurance_Type,Discharge_Status,Readmission_Within_30_Days,Clinical_Notes
+1,2023-04-17,2023-04-28,51,41-60,Other,Heart Failure,ICU,6,11,Private,Home,No,Heart Failure managed during admission; status: Home.
+2,2023-04-13,2023-04-16,71,61+,Male,Asthma,Pediatrics,2,3,Medicare,Home,No,Clinical course involved Asthma; patient was home.
+3,2023-03-29,2023-04-12,82,61+,Other,Heart Failure,ICU,9,14,Medicare,Expired,No,Patient case: Heart Failure. Final status: Expired.
+4,2023-11-05,2023-11-14,23,13-24,Male,Appendicitis,Surgery,6,9,Private,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+5,2023-10-21,2023-10-29,1,0-12,Male,Asthma,Pediatrics,4,8,Private,Home,No,Patient case: Asthma. Final status: Home.
+6,2023-10-04,2023-10-15,1,0-12,Male,Infection,General Medicine,6,11,Private,Home,No,Patient case: Infection. Final status: Home.
+7,2023-01-22,2023-01-28,32,25-40,Female,Asthma,Pediatrics,4,6,Private,Home,No,Asthma managed during admission; status: Home.
+8,2023-02-28,2023-03-07,88,61+,Male,Fracture,Orthopedics,3,7,Medicare,Home,No,Home following treatment for Fracture.
+9,2023-07-07,2023-07-19,41,41-60,Female,COPD,Pulmonology,7,12,Private,Transferred to Rehab,No,Patient treated for COPD. Discharge outcome: Transferred to Rehab.
+10,2023-06-24,2023-07-07,79,61+,Female,Heart Failure,ICU,9,13,Medicare,Expired,Yes,Heart Failure managed during admission; status: Expired.
+11,2023-02-24,2023-03-07,61,61+,Other,COPD,Pulmonology,6,11,Medicaid,Home,No,Home following treatment for COPD.
+12,2023-11-03,2023-11-14,63,61+,Other,Heart Failure,ICU,6,11,Uninsured,Home,No,Home following treatment for Heart Failure.
+13,2023-06-16,2023-06-21,6,0-12,Male,Infection,General Medicine,3,5,Private,Home,No,Patient case: Infection. Final status: Home.
+14,2023-11-12,2023-11-21,17,13-24,Female,Appendicitis,Surgery,7,9,Medicaid,Transferred to Rehab,Yes,Appendicitis managed during admission; status: Transferred to Rehab.
+15,2023-09-22,2023-09-26,13,13-24,Male,Asthma,Pediatrics,2,4,Medicaid,Home,No,Home following treatment for Asthma.
+16,2023-12-06,2023-12-15,89,61+,Female,Alzheimer's,Geriatrics,6,9,Medicare,Home,No,Alzheimer's managed during admission; status: Home.
+17,2023-09-21,2023-10-02,91,61+,Male,Diabetes,Endocrinology,6,11,Medicare,Home,No,Diabetes managed during admission; status: Home.
+18,2023-03-22,2023-03-31,46,41-60,Male,COPD,Pulmonology,6,9,Medicaid,Home,No,Patient treated for COPD. Discharge outcome: Home.
+19,2023-01-02,2023-01-10,35,25-40,Other,Fracture,Orthopedics,3,8,Medicare,Home,No,Clinical course involved Fracture; patient was home.
+20,2023-09-17,2023-09-26,5,0-12,Male,Alzheimer's,Geriatrics,6,9,Private,Home,No,Patient case: Alzheimer's. Final status: Home.
+21,2023-08-06,2023-08-13,53,41-60,Male,Diabetes,Endocrinology,3,7,Medicaid,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+22,2023-09-27,2023-10-08,43,41-60,Male,Stroke,ICU,7,11,Private,Home,Yes,Patient case: Stroke. Final status: Home.
+23,2023-08-03,2023-08-14,94,61+,Other,Diabetes,Endocrinology,7,11,Medicare,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Diabetes.
+24,2023-07-27,2023-08-05,61,61+,Male,COPD,Pulmonology,7,9,Medicare,Transferred to Rehab,No,Patient case: COPD. Final status: Transferred to Rehab.
+25,2023-10-07,2023-10-16,81,61+,Female,Appendicitis,Surgery,7,9,Medicare,Transferred to Rehab,Yes,Clinical course involved Appendicitis; patient was transferred to rehab.
+26,2023-07-07,2023-07-17,25,25-40,Other,Alzheimer's,Geriatrics,5,10,Private,Home,No,Patient treated for Alzheimer's. Discharge outcome: Home.
+27,2023-10-28,2023-11-03,40,25-40,Male,Fracture,Orthopedics,2,6,Medicaid,Home,No,Home following treatment for Fracture.
+28,2023-01-09,2023-01-20,64,61+,Other,Heart Failure,ICU,6,11,Private,Home,No,Patient case: Heart Failure. Final status: Home.
+29,2023-05-16,2023-05-25,87,61+,Female,Infection,General Medicine,4,9,Medicare,Home,No,Infection managed during admission; status: Home.
+30,2023-03-22,2023-04-05,87,61+,Other,Stroke,ICU,9,14,Medicare,Expired,No,Patient treated for Stroke. Discharge outcome: Expired.
+31,2023-10-16,2023-10-25,7,0-12,Other,Infection,General Medicine,5,9,Medicaid,Home,No,Infection managed during admission; status: Home.
+32,2023-02-10,2023-02-19,4,0-12,Male,COPD,Pulmonology,5,9,Private,Home,No,Home following treatment for COPD.
+33,2023-11-24,2023-12-02,27,25-40,Male,COPD,Pulmonology,6,8,Uninsured,Home,No,Clinical course involved COPD; patient was home.
+34,2023-02-17,2023-02-27,11,0-12,Other,Heart Failure,ICU,7,10,Medicaid,Home,Yes,Patient case: Heart Failure. Final status: Home.
+35,2023-10-20,2023-10-28,22,13-24,Male,Fracture,Orthopedics,3,8,Private,Home,No,Clinical course involved Fracture; patient was home.
+36,2023-02-04,2023-02-13,43,41-60,Other,Infection,General Medicine,6,9,Uninsured,Home,No,Patient case: Infection. Final status: Home.
+37,2023-05-11,2023-05-20,64,61+,Female,Alzheimer's,Geriatrics,7,9,Medicaid,Transferred to Rehab,No,Alzheimer's managed during admission; status: Transferred to Rehab.
+38,2023-09-12,2023-09-22,0,0-12,Male,Stroke,ICU,6,10,Private,Home,No,Patient case: Stroke. Final status: Home.
+39,2023-07-26,2023-08-08,13,13-24,Male,Heart Failure,ICU,8,13,Uninsured,Home,No,Patient case: Heart Failure. Final status: Home.
+40,2023-06-28,2023-07-04,14,13-24,Male,Fracture,Orthopedics,3,6,Medicaid,Home,No,Patient case: Fracture. Final status: Home.
+41,2023-08-29,2023-09-09,62,61+,Male,COPD,Pulmonology,7,11,Uninsured,Transferred to Rehab,No,Patient case: COPD. Final status: Transferred to Rehab.
+42,2023-08-10,2023-08-15,51,41-60,Other,Asthma,Pediatrics,1,5,Medicaid,Home,No,Home following treatment for Asthma.
+43,2023-05-23,2023-05-30,22,13-24,Other,Diabetes,Endocrinology,5,7,Private,Home,No,Patient case: Diabetes. Final status: Home.
+44,2023-01-13,2023-01-25,42,41-60,Female,Heart Failure,ICU,6,12,Private,Home,No,Patient treated for Heart Failure. Discharge outcome: Home.
+45,2023-08-31,2023-09-13,31,25-40,Female,Stroke,ICU,8,13,Private,Transferred to Rehab,Yes,Patient treated for Stroke. Discharge outcome: Transferred to Rehab.
+46,2023-06-19,2023-07-03,85,61+,Other,Stroke,ICU,10,14,Medicare,Expired,Yes,Patient treated for Stroke. Discharge outcome: Expired.
+47,2023-05-14,2023-05-24,44,41-60,Female,Heart Failure,ICU,7,10,Private,Transferred to Rehab,Yes,Patient case: Heart Failure. Final status: Transferred to Rehab.
+48,2023-02-13,2023-02-25,27,25-40,Male,Appendicitis,Surgery,7,12,Private,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Appendicitis.
+49,2023-11-27,2023-12-09,83,61+,Male,Heart Failure,ICU,8,12,Medicare,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Heart Failure.
+50,2023-07-09,2023-07-19,91,61+,Female,Alzheimer's,Geriatrics,6,10,Medicare,Home,No,Patient treated for Alzheimer's. Discharge outcome: Home.
+51,2023-05-01,2023-05-12,0,0-12,Other,Heart Failure,ICU,6,11,Private,Home,No,Heart Failure managed during admission; status: Home.
+52,2023-12-25,2023-12-30,76,61+,Male,Asthma,Pediatrics,2,5,Medicare,Home,No,Clinical course involved Asthma; patient was home.
+53,2023-05-17,2023-05-27,69,61+,Male,Infection,General Medicine,6,10,Medicare,Home,No,Home following treatment for Infection.
+54,2023-11-03,2023-11-06,61,61+,Male,Pregnancy,Obstetrics,1,3,Private,Home,No,Home following treatment for Pregnancy.
+55,2023-11-11,2023-11-25,43,41-60,Male,Heart Failure,ICU,9,14,Medicare,Transferred to Rehab,No,Patient treated for Heart Failure. Discharge outcome: Transferred to Rehab.
+56,2023-08-21,2023-09-01,31,25-40,Other,Infection,General Medicine,6,11,Medicaid,Home,No,Patient treated for Infection. Discharge outcome: Home.
+57,2023-02-21,2023-02-26,51,41-60,Male,Fracture,Orthopedics,2,5,Private,Home,No,Home following treatment for Fracture.
+58,2023-04-23,2023-04-29,11,0-12,Male,Pregnancy,Obstetrics,2,6,Uninsured,Home,No,Clinical course involved Pregnancy; patient was home.
+59,2023-04-23,2023-05-04,55,41-60,Female,Stroke,ICU,6,11,Uninsured,Home,No,Stroke managed during admission; status: Home.
+60,2023-02-23,2023-03-05,1,0-12,Female,COPD,Pulmonology,5,10,Private,Home,No,Patient case: COPD. Final status: Home.
+61,2023-08-13,2023-08-24,86,61+,Other,Alzheimer's,Geriatrics,6,11,Medicare,Home,No,Clinical course involved Alzheimer's; patient was home.
+62,2023-05-10,2023-05-19,0,0-12,Male,COPD,Pulmonology,6,9,Private,Home,No,Patient treated for COPD. Discharge outcome: Home.
+63,2023-06-09,2023-06-18,52,41-60,Other,Infection,General Medicine,6,9,Private,Home,No,Infection managed during admission; status: Home.
+64,2023-11-20,2023-12-04,69,61+,Male,Stroke,ICU,9,14,Medicare,Transferred to Rehab,No,Patient case: Stroke. Final status: Transferred to Rehab.
+65,2023-05-03,2023-05-17,54,41-60,Male,Stroke,ICU,8,14,Private,Home,Yes,Patient case: Stroke. Final status: Home.
+66,2023-10-07,2023-10-12,16,13-24,Male,Asthma,Pediatrics,3,5,Private,Home,No,Patient case: Asthma. Final status: Home.
+67,2023-07-17,2023-07-27,68,61+,Male,Appendicitis,Surgery,7,10,Medicare,Transferred to Rehab,No,Transferred to Rehab following treatment for Appendicitis.
+68,2023-08-28,2023-09-08,85,61+,Other,Appendicitis,Surgery,7,11,Medicare,Transferred to Rehab,Yes,Appendicitis managed during admission; status: Transferred to Rehab.
+69,2023-05-04,2023-05-09,15,13-24,Male,Diabetes,Endocrinology,3,5,Private,Home,No,Home following treatment for Diabetes.
+70,2023-12-15,2023-12-25,58,41-60,Male,COPD,Pulmonology,5,10,Private,Home,No,Patient treated for COPD. Discharge outcome: Home.
+71,2023-12-12,2023-12-25,2,0-12,Male,Alzheimer's,Geriatrics,8,13,Private,Transferred to Rehab,No,Patient case: Alzheimer's. Final status: Transferred to Rehab.
+72,2023-05-28,2023-06-06,66,61+,Male,Infection,General Medicine,5,9,Medicare,Home,No,Infection managed during admission; status: Home.
+73,2023-05-08,2023-05-17,70,61+,Male,Diabetes,Endocrinology,7,9,Medicare,Home,No,Diabetes managed during admission; status: Home.
+74,2023-05-09,2023-05-17,38,25-40,Female,Fracture,Orthopedics,3,8,Private,Home,No,Patient case: Fracture. Final status: Home.
+75,2023-05-31,2023-06-09,10,0-12,Other,COPD,Pulmonology,7,9,Medicaid,Transferred to Rehab,No,Patient treated for COPD. Discharge outcome: Transferred to Rehab.
+76,2023-04-09,2023-04-16,30,25-40,Other,Infection,General Medicine,4,7,Private,Home,No,Patient treated for Infection. Discharge outcome: Home.
+77,2023-12-12,2023-12-24,6,0-12,Male,COPD,Pulmonology,7,12,Medicare,Transferred to Rehab,Yes,COPD managed during admission; status: Transferred to Rehab.
+78,2023-10-31,2023-11-07,59,41-60,Female,Appendicitis,Surgery,4,7,Private,Home,No,Appendicitis managed during admission; status: Home.
+79,2023-06-09,2023-06-15,11,0-12,Male,COPD,Pulmonology,4,6,Medicare,Home,No,COPD managed during admission; status: Home.
+80,2023-05-27,2023-06-07,8,0-12,Male,Heart Failure,ICU,6,11,Medicaid,Home,No,Heart Failure managed during admission; status: Home.
+81,2023-06-01,2023-06-15,47,41-60,Male,Stroke,ICU,9,14,Uninsured,Transferred to Rehab,Yes,Clinical course involved Stroke; patient was transferred to rehab.
+82,2023-04-26,2023-05-06,53,41-60,Other,Alzheimer's,Geriatrics,8,10,Private,Transferred to Rehab,Yes,Patient treated for Alzheimer's. Discharge outcome: Transferred to Rehab.
+83,2023-04-14,2023-04-22,74,61+,Other,Fracture,Orthopedics,3,8,Medicare,Home,No,Patient case: Fracture. Final status: Home.
+84,2023-04-22,2023-05-01,83,61+,Male,Diabetes,Endocrinology,5,9,Medicare,Home,No,Patient case: Diabetes. Final status: Home.
+85,2023-12-15,2023-12-22,88,61+,Other,Fracture,Orthopedics,5,7,Medicare,Home,No,Home following treatment for Fracture.
+86,2023-12-04,2023-12-17,17,13-24,Male,Stroke,ICU,9,13,Medicaid,Transferred to Rehab,No,Patient treated for Stroke. Discharge outcome: Transferred to Rehab.
+87,2023-07-27,2023-08-01,65,61+,Female,Asthma,Pediatrics,2,5,Medicare,Home,No,Clinical course involved Asthma; patient was home.
+88,2023-06-10,2023-06-22,60,41-60,Other,Heart Failure,ICU,6,12,Private,Home,No,Patient case: Heart Failure. Final status: Home.
+89,2023-10-04,2023-10-11,67,61+,Female,Appendicitis,Surgery,4,7,Medicare,Home,No,Clinical course involved Appendicitis; patient was home.
+90,2023-05-15,2023-05-25,47,41-60,Male,Fracture,Orthopedics,5,10,Uninsured,Home,No,Clinical course involved Fracture; patient was home.
+91,2023-02-02,2023-02-14,66,61+,Female,Stroke,ICU,6,12,Medicare,Home,No,Clinical course involved Stroke; patient was home.
+92,2023-01-22,2023-02-01,47,41-60,Other,Diabetes,Endocrinology,6,10,Medicaid,Home,No,Home following treatment for Diabetes.
+93,2023-12-31,2024-01-04,29,25-40,Other,Asthma,Pediatrics,2,4,Private,Home,No,Patient treated for Asthma. Discharge outcome: Home.
+94,2023-10-10,2023-10-23,50,41-60,Female,Stroke,ICU,7,13,Medicaid,Home,Yes,Home following treatment for Stroke.
+95,2023-10-13,2023-10-20,26,25-40,Female,COPD,Pulmonology,5,7,Medicaid,Home,No,Clinical course involved COPD; patient was home.
+96,2023-11-13,2023-11-27,27,25-40,Male,Stroke,ICU,8,14,Private,Transferred to Rehab,Yes,Patient treated for Stroke. Discharge outcome: Transferred to Rehab.
+97,2023-02-04,2023-02-14,47,41-60,Female,Diabetes,Endocrinology,5,10,Medicaid,Home,No,Home following treatment for Diabetes.
+98,2023-01-17,2023-01-25,63,61+,Other,Infection,General Medicine,3,8,Private,Home,No,Patient treated for Infection. Discharge outcome: Home.
+99,2023-02-15,2023-02-25,43,41-60,Male,COPD,Pulmonology,7,10,Private,Transferred to Rehab,No,Patient treated for COPD. Discharge outcome: Transferred to Rehab.
+100,2023-08-21,2023-08-29,5,0-12,Other,Pregnancy,Obstetrics,3,8,Private,Home,No,Pregnancy managed during admission; status: Home.
+101,2023-10-29,2023-11-07,36,25-40,Female,Appendicitis,Surgery,7,9,Medicaid,Home,Yes,Clinical course involved Appendicitis; patient was home.
+102,2023-07-07,2023-07-20,52,41-60,Female,Stroke,ICU,8,13,Uninsured,Home,Yes,Patient case: Stroke. Final status: Home.
+103,2023-06-10,2023-06-12,62,61+,Other,Asthma,Pediatrics,1,2,Private,Home,No,Patient treated for Asthma. Discharge outcome: Home.
+104,2023-10-08,2023-10-17,66,61+,Other,Diabetes,Endocrinology,6,9,Medicare,Home,No,Patient case: Diabetes. Final status: Home.
+105,2023-11-19,2023-12-01,94,61+,Female,Heart Failure,ICU,8,12,Medicare,Home,Yes,Heart Failure managed during admission; status: Home.
+106,2023-10-15,2023-10-22,45,41-60,Other,Pregnancy,Obstetrics,4,7,Private,Home,No,Pregnancy managed during admission; status: Home.
+107,2023-05-07,2023-05-14,46,41-60,Other,Fracture,Orthopedics,3,7,Private,Home,No,Home following treatment for Fracture.
+108,2023-09-30,2023-10-06,26,25-40,Other,Fracture,Orthopedics,3,6,Medicaid,Home,No,Fracture managed during admission; status: Home.
+109,2023-09-03,2023-09-10,32,25-40,Female,Infection,General Medicine,3,7,Medicaid,Home,No,Infection managed during admission; status: Home.
+110,2023-06-19,2023-06-23,47,41-60,Female,Asthma,Pediatrics,3,4,Private,Home,No,Patient case: Asthma. Final status: Home.
+111,2023-01-13,2023-01-21,25,25-40,Other,Diabetes,Endocrinology,5,8,Private,Home,No,Home following treatment for Diabetes.
+112,2023-11-09,2023-11-14,59,41-60,Other,Asthma,Pediatrics,2,5,Medicare,Home,No,Clinical course involved Asthma; patient was home.
+113,2023-11-17,2023-11-29,35,25-40,Other,Heart Failure,ICU,6,12,Private,Home,No,Patient case: Heart Failure. Final status: Home.
+114,2023-05-22,2023-06-04,7,0-12,Female,Heart Failure,ICU,9,13,Medicaid,Home,No,Clinical course involved Heart Failure; patient was home.
+115,2023-05-23,2023-06-01,75,61+,Male,Fracture,Orthopedics,5,9,Medicare,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+116,2023-10-15,2023-10-20,91,61+,Male,Asthma,Pediatrics,3,5,Medicare,Home,No,Home following treatment for Asthma.
+117,2023-02-20,2023-03-05,86,61+,Other,Heart Failure,ICU,9,13,Medicare,Expired,Yes,Patient case: Heart Failure. Final status: Expired.
+118,2023-07-09,2023-07-15,24,13-24,Male,Pregnancy,Obstetrics,2,6,Private,Home,No,Clinical course involved Pregnancy; patient was home.
+119,2023-12-08,2023-12-19,21,13-24,Male,Stroke,ICU,7,11,Medicaid,Home,No,Home following treatment for Stroke.
+120,2023-11-22,2023-11-30,48,41-60,Male,Fracture,Orthopedics,5,8,Medicaid,Home,No,Patient case: Fracture. Final status: Home.
+121,2023-04-11,2023-04-23,14,13-24,Female,Stroke,ICU,7,12,Private,Transferred to Rehab,No,Clinical course involved Stroke; patient was transferred to rehab.
+122,2023-04-18,2023-04-26,7,0-12,Female,Infection,General Medicine,3,8,Uninsured,Home,No,Patient case: Infection. Final status: Home.
+123,2023-09-19,2023-10-01,4,0-12,Female,Alzheimer's,Geriatrics,7,12,Medicare,Transferred to Rehab,No,Patient case: Alzheimer's. Final status: Transferred to Rehab.
+124,2023-11-07,2023-11-16,93,61+,Female,Fracture,Orthopedics,5,9,Medicare,Home,No,Home following treatment for Fracture.
+125,2023-09-26,2023-10-08,39,25-40,Female,COPD,Pulmonology,7,12,Private,Home,No,Patient case: COPD. Final status: Home.
+126,2023-04-30,2023-05-04,29,25-40,Female,Asthma,Pediatrics,3,4,Private,Home,No,Patient treated for Asthma. Discharge outcome: Home.
+127,2023-02-27,2023-03-10,62,61+,Other,COPD,Pulmonology,6,11,Private,Home,No,COPD managed during admission; status: Home.
+128,2023-04-27,2023-05-03,54,41-60,Female,Infection,General Medicine,4,6,Private,Home,No,Clinical course involved Infection; patient was home.
+129,2023-05-09,2023-05-16,61,61+,Male,Pregnancy,Obstetrics,3,7,Medicaid,Home,No,Clinical course involved Pregnancy; patient was home.
+130,2023-08-27,2023-08-31,57,41-60,Male,Pregnancy,Obstetrics,2,4,Private,Home,No,Patient case: Pregnancy. Final status: Home.
+131,2023-04-28,2023-05-05,33,25-40,Female,Pregnancy,Obstetrics,4,7,Private,Home,No,Home following treatment for Pregnancy.
+132,2023-08-25,2023-09-03,47,41-60,Female,Appendicitis,Surgery,4,9,Uninsured,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+133,2023-07-11,2023-07-17,0,0-12,Other,Pregnancy,Obstetrics,4,6,Private,Home,No,Pregnancy managed during admission; status: Home.
+134,2023-12-15,2023-12-19,62,61+,Female,Pregnancy,Obstetrics,1,4,Medicaid,Home,No,Home following treatment for Pregnancy.
+135,2023-05-24,2023-06-02,66,61+,Other,Infection,General Medicine,6,9,Medicare,Home,No,Patient case: Infection. Final status: Home.
+136,2023-07-04,2023-07-12,50,41-60,Male,Alzheimer's,Geriatrics,5,8,Private,Home,No,Home following treatment for Alzheimer's.
+137,2023-03-10,2023-03-23,28,25-40,Female,Stroke,ICU,7,13,Medicaid,Transferred to Rehab,No,Clinical course involved Stroke; patient was transferred to rehab.
+138,2023-08-26,2023-08-31,46,41-60,Female,Fracture,Orthopedics,2,5,Uninsured,Home,No,Patient case: Fracture. Final status: Home.
+139,2023-07-23,2023-07-29,61,61+,Male,Pregnancy,Obstetrics,4,6,Medicare,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+140,2023-12-07,2023-12-12,15,13-24,Male,Pregnancy,Obstetrics,2,5,Private,Home,No,Home following treatment for Pregnancy.
+141,2023-09-11,2023-09-23,38,25-40,Male,Stroke,ICU,9,12,Private,Transferred to Rehab,Yes,Stroke managed during admission; status: Transferred to Rehab.
+142,2023-09-07,2023-09-16,93,61+,Female,COPD,Pulmonology,5,9,Medicare,Home,No,Home following treatment for COPD.
+143,2023-04-10,2023-04-20,9,0-12,Female,Heart Failure,ICU,7,10,Private,Transferred to Rehab,No,Heart Failure managed during admission; status: Transferred to Rehab.
+144,2023-09-07,2023-09-21,33,25-40,Male,Heart Failure,ICU,9,14,Medicaid,Home,No,Clinical course involved Heart Failure; patient was home.
+145,2023-09-14,2023-09-27,18,13-24,Male,Stroke,ICU,7,13,Private,Transferred to Rehab,Yes,Patient treated for Stroke. Discharge outcome: Transferred to Rehab.
+146,2023-01-16,2023-01-21,68,61+,Other,Asthma,Pediatrics,1,5,Medicare,Home,No,Home following treatment for Asthma.
+147,2023-09-15,2023-09-26,23,13-24,Other,COPD,Pulmonology,7,11,Medicaid,Home,Yes,Patient treated for COPD. Discharge outcome: Home.
+148,2023-12-06,2023-12-19,91,61+,Male,COPD,Pulmonology,8,13,Medicare,Transferred to Rehab,Yes,COPD managed during admission; status: Transferred to Rehab.
+149,2023-06-12,2023-06-19,23,13-24,Other,Pregnancy,Obstetrics,4,7,Private,Home,No,Clinical course involved Pregnancy; patient was home.
+150,2023-06-28,2023-07-04,32,25-40,Male,Appendicitis,Surgery,4,6,Medicaid,Home,No,Clinical course involved Appendicitis; patient was home.
+151,2023-11-19,2023-11-28,42,41-60,Male,COPD,Pulmonology,4,9,Medicaid,Home,No,Patient case: COPD. Final status: Home.
+152,2023-11-26,2023-12-05,64,61+,Male,Appendicitis,Surgery,4,9,Medicaid,Home,No,Appendicitis managed during admission; status: Home.
+153,2023-01-12,2023-01-18,42,41-60,Other,Pregnancy,Obstetrics,4,6,Medicaid,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+154,2023-09-10,2023-09-18,94,61+,Other,Diabetes,Endocrinology,5,8,Medicare,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+155,2023-03-31,2023-04-09,34,25-40,Female,Alzheimer's,Geriatrics,7,9,Medicaid,Transferred to Rehab,No,Transferred to Rehab following treatment for Alzheimer's.
+156,2023-03-31,2023-04-05,7,0-12,Other,Fracture,Orthopedics,2,5,Private,Home,No,Patient case: Fracture. Final status: Home.
+157,2023-07-15,2023-07-23,33,25-40,Other,COPD,Pulmonology,6,8,Medicaid,Home,No,Patient case: COPD. Final status: Home.
+158,2023-03-16,2023-03-24,57,41-60,Female,Alzheimer's,Geriatrics,5,8,Private,Home,No,Patient case: Alzheimer's. Final status: Home.
+159,2023-08-05,2023-08-16,28,25-40,Female,Diabetes,Endocrinology,6,11,Medicaid,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+160,2023-06-13,2023-06-20,20,13-24,Female,Alzheimer's,Geriatrics,5,7,Private,Home,No,Home following treatment for Alzheimer's.
+161,2023-07-11,2023-07-17,9,0-12,Other,Appendicitis,Surgery,4,6,Medicaid,Home,No,Appendicitis managed during admission; status: Home.
+162,2023-02-05,2023-02-17,48,41-60,Male,Alzheimer's,Geriatrics,7,12,Private,Home,Yes,Alzheimer's managed during admission; status: Home.
+163,2023-04-06,2023-04-15,81,61+,Female,COPD,Pulmonology,5,9,Medicare,Home,No,Patient case: COPD. Final status: Home.
+164,2023-08-12,2023-08-21,23,13-24,Other,COPD,Pulmonology,6,9,Medicare,Home,No,Patient case: COPD. Final status: Home.
+165,2023-07-02,2023-07-14,36,25-40,Male,Heart Failure,ICU,9,12,Medicare,Transferred to Rehab,Yes,Clinical course involved Heart Failure; patient was transferred to rehab.
+166,2023-12-21,2023-12-30,12,0-12,Other,Alzheimer's,Geriatrics,7,9,Medicaid,Transferred to Rehab,Yes,Patient treated for Alzheimer's. Discharge outcome: Transferred to Rehab.
+167,2023-03-03,2023-03-05,29,25-40,Female,Asthma,Pediatrics,1,2,Private,Home,No,Clinical course involved Asthma; patient was home.
+168,2023-12-08,2023-12-18,83,61+,Female,Appendicitis,Surgery,8,10,Medicare,Transferred to Rehab,No,Appendicitis managed during admission; status: Transferred to Rehab.
+169,2023-06-26,2023-07-05,12,0-12,Female,Infection,General Medicine,5,9,Private,Home,No,Home following treatment for Infection.
+170,2023-03-17,2023-03-23,11,0-12,Female,COPD,Pulmonology,4,6,Private,Home,No,Patient treated for COPD. Discharge outcome: Home.
+171,2023-07-25,2023-08-01,8,0-12,Other,Asthma,Pediatrics,3,7,Private,Home,No,Patient case: Asthma. Final status: Home.
+172,2023-12-05,2023-12-16,94,61+,Other,Fracture,Orthopedics,6,11,Medicare,Home,No,Clinical course involved Fracture; patient was home.
+173,2023-04-09,2023-04-16,15,13-24,Male,Alzheimer's,Geriatrics,5,7,Private,Home,No,Patient case: Alzheimer's. Final status: Home.
+174,2023-02-22,2023-03-03,11,0-12,Other,Appendicitis,Surgery,4,9,Private,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+175,2023-02-08,2023-02-17,22,13-24,Male,COPD,Pulmonology,7,9,Private,Transferred to Rehab,Yes,Patient case: COPD. Final status: Transferred to Rehab.
+176,2023-08-11,2023-08-19,52,41-60,Male,COPD,Pulmonology,5,8,Private,Home,No,Patient treated for COPD. Discharge outcome: Home.
+177,2023-08-09,2023-08-19,4,0-12,Other,COPD,Pulmonology,6,10,Medicaid,Home,No,Clinical course involved COPD; patient was home.
+178,2023-03-17,2023-03-28,74,61+,Other,Alzheimer's,Geriatrics,7,11,Medicare,Transferred to Rehab,Yes,Alzheimer's managed during admission; status: Transferred to Rehab.
+179,2023-09-10,2023-09-19,8,0-12,Female,Alzheimer's,Geriatrics,6,9,Private,Home,No,Clinical course involved Alzheimer's; patient was home.
+180,2023-06-17,2023-06-24,6,0-12,Male,COPD,Pulmonology,5,7,Uninsured,Home,No,Home following treatment for COPD.
+181,2023-10-10,2023-10-20,41,41-60,Male,Heart Failure,ICU,6,10,Private,Home,No,Patient treated for Heart Failure. Discharge outcome: Home.
+182,2023-06-14,2023-06-23,65,61+,Other,Stroke,ICU,6,9,Medicare,Home,No,Clinical course involved Stroke; patient was home.
+183,2023-12-31,2024-01-11,37,25-40,Male,Appendicitis,Surgery,6,11,Uninsured,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+184,2023-05-25,2023-06-07,64,61+,Male,Heart Failure,ICU,7,13,Medicare,Transferred to Rehab,Yes,Patient case: Heart Failure. Final status: Transferred to Rehab.
+185,2023-05-12,2023-05-18,70,61+,Male,Infection,General Medicine,4,6,Medicare,Home,No,Home following treatment for Infection.
+186,2023-10-02,2023-10-13,35,25-40,Female,Alzheimer's,Geriatrics,6,11,Private,Home,No,Patient case: Alzheimer's. Final status: Home.
+187,2023-06-16,2023-06-26,60,41-60,Female,COPD,Pulmonology,7,10,Uninsured,Transferred to Rehab,Yes,Patient treated for COPD. Discharge outcome: Transferred to Rehab.
+188,2023-01-19,2023-01-24,90,61+,Male,Asthma,Pediatrics,3,5,Medicare,Home,No,Asthma managed during admission; status: Home.
+189,2023-06-22,2023-07-04,38,25-40,Other,Heart Failure,ICU,7,12,Private,Transferred to Rehab,Yes,Patient treated for Heart Failure. Discharge outcome: Transferred to Rehab.
+190,2023-05-06,2023-05-17,12,0-12,Female,Alzheimer's,Geriatrics,6,11,Medicaid,Home,No,Home following treatment for Alzheimer's.
+191,2023-11-13,2023-11-28,57,41-60,Female,Stroke,ICU,9,15,Medicaid,Transferred to Rehab,No,Transferred to Rehab following treatment for Stroke.
+192,2023-12-14,2023-12-18,38,25-40,Male,Asthma,Pediatrics,1,4,Uninsured,Home,No,Patient case: Asthma. Final status: Home.
+193,2023-11-08,2023-11-12,61,61+,Other,Asthma,Pediatrics,1,4,Private,Home,No,Patient case: Asthma. Final status: Home.
+194,2023-05-14,2023-05-19,32,25-40,Male,Fracture,Orthopedics,3,5,Uninsured,Home,No,Clinical course involved Fracture; patient was home.
+195,2023-06-09,2023-06-21,57,41-60,Male,Stroke,ICU,9,12,Medicaid,Transferred to Rehab,Yes,Patient case: Stroke. Final status: Transferred to Rehab.
+196,2023-05-29,2023-06-07,44,41-60,Female,Alzheimer's,Geriatrics,5,9,Private,Home,No,Alzheimer's managed during admission; status: Home.
+197,2023-07-22,2023-07-27,79,61+,Other,Pregnancy,Obstetrics,3,5,Medicare,Home,No,Pregnancy managed during admission; status: Home.
+198,2023-01-20,2023-01-29,35,25-40,Other,Infection,General Medicine,5,9,Private,Home,No,Patient treated for Infection. Discharge outcome: Home.
+199,2023-08-21,2023-09-02,56,41-60,Other,Stroke,ICU,7,12,Medicaid,Home,No,Patient treated for Stroke. Discharge outcome: Home.
+200,2023-01-01,2023-01-06,48,41-60,Male,Asthma,Pediatrics,2,5,Uninsured,Home,No,Patient case: Asthma. Final status: Home.
+201,2023-05-24,2023-06-05,53,41-60,Other,Stroke,ICU,7,12,Private,Home,No,Patient treated for Stroke. Discharge outcome: Home.
+202,2023-01-12,2023-01-22,86,61+,Male,Alzheimer's,Geriatrics,6,10,Medicare,Home,No,Patient case: Alzheimer's. Final status: Home.
+203,2023-12-24,2024-01-07,73,61+,Other,Alzheimer's,Geriatrics,9,14,Medicare,Home,Yes,Patient case: Alzheimer's. Final status: Home.
+204,2023-01-08,2023-01-22,75,61+,Female,Alzheimer's,Geriatrics,9,14,Medicare,Expired,No,Expired following treatment for Alzheimer's.
+205,2023-05-16,2023-05-24,91,61+,Female,Pregnancy,Obstetrics,5,8,Medicare,Home,No,Pregnancy managed during admission; status: Home.
+206,2023-01-28,2023-02-10,57,41-60,Female,Heart Failure,ICU,9,13,Medicaid,Home,Yes,Heart Failure managed during admission; status: Home.
+207,2023-08-16,2023-08-20,91,61+,Other,Pregnancy,Obstetrics,2,4,Medicare,Home,No,Patient case: Pregnancy. Final status: Home.
+208,2023-05-25,2023-06-04,63,61+,Male,Alzheimer's,Geriatrics,7,10,Private,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Alzheimer's.
+209,2023-07-31,2023-08-10,72,61+,Other,Stroke,ICU,7,10,Medicare,Transferred to Rehab,No,Transferred to Rehab following treatment for Stroke.
+210,2023-02-15,2023-02-24,76,61+,Male,Asthma,Pediatrics,5,9,Medicare,Home,No,Patient case: Asthma. Final status: Home.
+211,2023-03-23,2023-03-30,34,25-40,Female,Appendicitis,Surgery,4,7,Medicaid,Home,No,Home following treatment for Appendicitis.
+212,2023-01-10,2023-01-14,68,61+,Male,Asthma,Pediatrics,3,4,Medicare,Home,No,Asthma managed during admission; status: Home.
+213,2023-09-08,2023-09-14,55,41-60,Other,Fracture,Orthopedics,3,6,Uninsured,Home,No,Home following treatment for Fracture.
+214,2023-10-16,2023-10-28,4,0-12,Other,Alzheimer's,Geriatrics,7,12,Medicaid,Transferred to Rehab,No,Clinical course involved Alzheimer's; patient was transferred to rehab.
+215,2023-08-27,2023-09-04,64,61+,Other,Fracture,Orthopedics,3,8,Private,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+216,2023-10-09,2023-10-14,48,41-60,Other,Pregnancy,Obstetrics,3,5,Private,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+217,2023-11-11,2023-11-21,62,61+,Female,Heart Failure,ICU,6,10,Medicaid,Home,No,Clinical course involved Heart Failure; patient was home.
+218,2023-04-08,2023-04-14,26,25-40,Female,COPD,Pulmonology,4,6,Medicare,Home,No,COPD managed during admission; status: Home.
+219,2023-11-07,2023-11-17,0,0-12,Female,Alzheimer's,Geriatrics,5,10,Uninsured,Home,No,Clinical course involved Alzheimer's; patient was home.
+220,2023-07-16,2023-07-24,5,0-12,Female,Infection,General Medicine,6,8,Private,Home,No,Clinical course involved Infection; patient was home.
+221,2023-09-16,2023-09-23,94,61+,Other,Infection,General Medicine,4,7,Medicare,Home,No,Clinical course involved Infection; patient was home.
+222,2023-02-22,2023-03-02,52,41-60,Male,COPD,Pulmonology,6,8,Medicaid,Home,No,Home following treatment for COPD.
+223,2023-03-24,2023-03-31,36,25-40,Female,Infection,General Medicine,4,7,Private,Home,No,Patient treated for Infection. Discharge outcome: Home.
+224,2023-01-01,2023-01-08,16,13-24,Female,COPD,Pulmonology,4,7,Medicaid,Home,No,Patient case: COPD. Final status: Home.
+225,2023-09-17,2023-09-24,50,41-60,Other,Alzheimer's,Geriatrics,5,7,Medicaid,Home,No,Home following treatment for Alzheimer's.
+226,2023-10-15,2023-10-22,61,61+,Other,Alzheimer's,Geriatrics,5,7,Private,Home,No,Patient case: Alzheimer's. Final status: Home.
+227,2023-03-13,2023-03-21,33,25-40,Other,Pregnancy,Obstetrics,4,8,Private,Home,No,Pregnancy managed during admission; status: Home.
+228,2023-06-11,2023-06-15,38,25-40,Male,Asthma,Pediatrics,2,4,Medicare,Home,No,Clinical course involved Asthma; patient was home.
+229,2023-11-02,2023-11-14,53,41-60,Female,Stroke,ICU,7,12,Uninsured,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Stroke.
+230,2023-08-24,2023-08-29,11,0-12,Female,Fracture,Orthopedics,2,5,Private,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+231,2023-09-08,2023-09-15,4,0-12,Male,Infection,General Medicine,4,7,Uninsured,Home,No,Infection managed during admission; status: Home.
+232,2023-09-12,2023-09-22,56,41-60,Male,Alzheimer's,Geriatrics,5,10,Private,Home,No,Home following treatment for Alzheimer's.
+233,2023-08-17,2023-08-25,46,41-60,Male,Fracture,Orthopedics,4,8,Private,Home,No,Clinical course involved Fracture; patient was home.
+234,2023-03-16,2023-03-26,84,61+,Male,Alzheimer's,Geriatrics,7,10,Medicare,Home,Yes,Patient case: Alzheimer's. Final status: Home.
+235,2023-07-11,2023-07-17,50,41-60,Other,Pregnancy,Obstetrics,3,6,Medicaid,Home,No,Pregnancy managed during admission; status: Home.
+236,2023-12-04,2023-12-11,37,25-40,Other,Infection,General Medicine,4,7,Private,Home,No,Infection managed during admission; status: Home.
+237,2023-11-04,2023-11-15,29,25-40,Other,Alzheimer's,Geriatrics,7,11,Private,Home,Yes,Alzheimer's managed during admission; status: Home.
+238,2023-12-01,2023-12-13,37,25-40,Male,Heart Failure,ICU,6,12,Private,Home,No,Patient treated for Heart Failure. Discharge outcome: Home.
+239,2023-02-20,2023-03-04,29,25-40,Other,Heart Failure,ICU,8,12,Uninsured,Transferred to Rehab,No,Patient treated for Heart Failure. Discharge outcome: Transferred to Rehab.
+240,2023-05-18,2023-05-28,80,61+,Female,Stroke,ICU,7,10,Medicare,Transferred to Rehab,Yes,Clinical course involved Stroke; patient was transferred to rehab.
+241,2023-09-30,2023-10-06,55,41-60,Male,Infection,General Medicine,3,6,Private,Home,No,Clinical course involved Infection; patient was home.
+242,2023-02-03,2023-02-11,83,61+,Male,Fracture,Orthopedics,6,8,Medicare,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+243,2023-07-24,2023-07-28,5,0-12,Other,Pregnancy,Obstetrics,1,4,Medicaid,Home,No,Clinical course involved Pregnancy; patient was home.
+244,2023-04-21,2023-05-02,42,41-60,Female,Appendicitis,Surgery,7,11,Private,Transferred to Rehab,Yes,Appendicitis managed during admission; status: Transferred to Rehab.
+245,2023-04-05,2023-04-19,22,13-24,Other,Stroke,ICU,8,14,Private,Home,Yes,Patient case: Stroke. Final status: Home.
+246,2023-01-08,2023-01-22,74,61+,Male,Heart Failure,ICU,8,14,Medicare,Transferred to Rehab,Yes,Patient case: Heart Failure. Final status: Transferred to Rehab.
+247,2023-07-03,2023-07-12,3,0-12,Female,Pregnancy,Obstetrics,4,9,Medicaid,Home,No,Home following treatment for Pregnancy.
+248,2023-07-14,2023-07-21,24,13-24,Female,Asthma,Pediatrics,3,7,Uninsured,Home,No,Home following treatment for Asthma.
+249,2023-03-02,2023-03-07,26,25-40,Male,Asthma,Pediatrics,1,5,Private,Home,No,Asthma managed during admission; status: Home.
+250,2023-01-05,2023-01-13,50,41-60,Other,COPD,Pulmonology,6,8,Uninsured,Home,No,COPD managed during admission; status: Home.
+251,2023-11-13,2023-11-21,81,61+,Male,Pregnancy,Obstetrics,5,8,Medicare,Home,No,Pregnancy managed during admission; status: Home.
+252,2023-01-01,2023-01-08,21,13-24,Male,Appendicitis,Surgery,4,7,Medicaid,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+253,2023-12-12,2023-12-22,4,0-12,Other,Alzheimer's,Geriatrics,5,10,Medicaid,Home,No,Alzheimer's managed during admission; status: Home.
+254,2023-03-19,2023-03-26,45,41-60,Male,Appendicitis,Surgery,5,7,Medicaid,Home,No,Clinical course involved Appendicitis; patient was home.
+255,2023-03-14,2023-03-19,89,61+,Other,Asthma,Pediatrics,2,5,Medicare,Home,No,Patient case: Asthma. Final status: Home.
+256,2023-05-01,2023-05-07,25,25-40,Female,Fracture,Orthopedics,2,6,Medicaid,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+257,2023-12-16,2023-12-29,85,61+,Female,Alzheimer's,Geriatrics,8,13,Medicare,Transferred to Rehab,Yes,Clinical course involved Alzheimer's; patient was transferred to rehab.
+258,2023-12-03,2023-12-12,62,61+,Male,COPD,Pulmonology,7,9,Private,Transferred to Rehab,Yes,Patient case: COPD. Final status: Transferred to Rehab.
+259,2023-01-08,2023-01-16,25,25-40,Female,Infection,General Medicine,6,8,Medicare,Home,No,Infection managed during admission; status: Home.
+260,2023-05-07,2023-05-17,51,41-60,Male,COPD,Pulmonology,6,10,Uninsured,Home,No,Home following treatment for COPD.
+261,2023-01-28,2023-02-04,55,41-60,Female,Diabetes,Endocrinology,4,7,Medicaid,Home,No,Home following treatment for Diabetes.
+262,2023-12-31,2024-01-09,86,61+,Male,Fracture,Orthopedics,4,9,Medicare,Home,No,Clinical course involved Fracture; patient was home.
+263,2023-11-08,2023-11-14,25,25-40,Other,Pregnancy,Obstetrics,2,6,Uninsured,Home,No,Patient case: Pregnancy. Final status: Home.
+264,2023-08-26,2023-09-08,6,0-12,Female,Heart Failure,ICU,8,13,Medicare,Home,Yes,Home following treatment for Heart Failure.
+265,2023-08-15,2023-08-23,17,13-24,Female,COPD,Pulmonology,5,8,Medicare,Home,No,COPD managed during admission; status: Home.
+266,2023-04-29,2023-05-04,14,13-24,Male,Asthma,Pediatrics,4,5,Private,Home,No,Patient case: Asthma. Final status: Home.
+267,2023-09-30,2023-10-08,27,25-40,Other,Diabetes,Endocrinology,4,8,Uninsured,Home,No,Clinical course involved Diabetes; patient was home.
+268,2023-10-27,2023-11-08,85,61+,Other,Heart Failure,ICU,8,12,Medicare,Transferred to Rehab,Yes,Heart Failure managed during admission; status: Transferred to Rehab.
+269,2023-07-31,2023-08-03,24,13-24,Other,Pregnancy,Obstetrics,1,3,Private,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+270,2023-03-08,2023-03-18,24,13-24,Male,COPD,Pulmonology,7,10,Private,Home,Yes,Patient case: COPD. Final status: Home.
+271,2023-04-21,2023-04-29,17,13-24,Male,Pregnancy,Obstetrics,3,8,Private,Home,No,Patient case: Pregnancy. Final status: Home.
+272,2023-09-21,2023-10-01,85,61+,Female,Appendicitis,Surgery,6,10,Medicare,Home,No,Clinical course involved Appendicitis; patient was home.
+273,2023-03-24,2023-04-05,39,25-40,Female,Heart Failure,ICU,6,12,Medicaid,Home,No,Patient case: Heart Failure. Final status: Home.
+274,2023-01-06,2023-01-12,41,41-60,Female,COPD,Pulmonology,4,6,Private,Home,No,COPD managed during admission; status: Home.
+275,2023-08-14,2023-08-25,51,41-60,Male,Alzheimer's,Geriatrics,6,11,Private,Home,No,Clinical course involved Alzheimer's; patient was home.
+276,2023-12-31,2024-01-14,58,41-60,Female,Heart Failure,ICU,9,14,Uninsured,Home,Yes,Heart Failure managed during admission; status: Home.
+277,2023-10-16,2023-10-19,69,61+,Male,Pregnancy,Obstetrics,1,3,Medicare,Home,No,Pregnancy managed during admission; status: Home.
+278,2023-07-17,2023-07-27,52,41-60,Male,Heart Failure,ICU,7,10,Private,Home,No,Clinical course involved Heart Failure; patient was home.
+279,2023-01-04,2023-01-15,69,61+,Other,Appendicitis,Surgery,6,11,Medicare,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+280,2023-11-14,2023-11-23,93,61+,Male,Diabetes,Endocrinology,6,9,Medicare,Home,No,Clinical course involved Diabetes; patient was home.
+281,2023-11-07,2023-11-19,93,61+,Male,Appendicitis,Surgery,7,12,Medicare,Transferred to Rehab,No,Patient case: Appendicitis. Final status: Transferred to Rehab.
+282,2023-08-31,2023-09-10,8,0-12,Male,Appendicitis,Surgery,6,10,Private,Home,No,Clinical course involved Appendicitis; patient was home.
+283,2023-02-05,2023-02-12,30,25-40,Female,Fracture,Orthopedics,5,7,Medicaid,Home,No,Patient case: Fracture. Final status: Home.
+284,2023-11-18,2023-11-27,23,13-24,Male,COPD,Pulmonology,6,9,Medicaid,Home,No,Clinical course involved COPD; patient was home.
+285,2023-01-04,2023-01-15,83,61+,Male,Infection,General Medicine,7,11,Medicare,Transferred to Rehab,Yes,Patient treated for Infection. Discharge outcome: Transferred to Rehab.
+286,2023-04-04,2023-04-16,78,61+,Male,Stroke,ICU,8,12,Medicare,Transferred to Rehab,No,Patient case: Stroke. Final status: Transferred to Rehab.
+287,2023-07-13,2023-07-23,50,41-60,Female,Stroke,ICU,7,10,Medicaid,Transferred to Rehab,Yes,Patient case: Stroke. Final status: Transferred to Rehab.
+288,2023-01-26,2023-02-10,78,61+,Male,Heart Failure,ICU,9,15,Medicare,Expired,Yes,Heart Failure managed during admission; status: Expired.
+289,2023-05-13,2023-05-22,50,41-60,Other,Appendicitis,Surgery,4,9,Private,Home,No,Patient case: Appendicitis. Final status: Home.
+290,2023-11-20,2023-11-28,69,61+,Male,Appendicitis,Surgery,5,8,Medicare,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+291,2023-01-20,2023-01-28,18,13-24,Other,Infection,General Medicine,6,8,Private,Home,No,Patient treated for Infection. Discharge outcome: Home.
+292,2023-03-31,2023-04-09,11,0-12,Male,Alzheimer's,Geriatrics,7,9,Private,Home,Yes,Home following treatment for Alzheimer's.
+293,2023-10-20,2023-11-02,13,13-24,Male,Heart Failure,ICU,9,13,Private,Transferred to Rehab,Yes,Patient case: Heart Failure. Final status: Transferred to Rehab.
+294,2023-11-29,2023-12-10,10,0-12,Other,Appendicitis,Surgery,6,11,Medicare,Home,No,Appendicitis managed during admission; status: Home.
+295,2023-06-27,2023-07-04,2,0-12,Female,Appendicitis,Surgery,4,7,Medicare,Home,No,Home following treatment for Appendicitis.
+296,2023-05-18,2023-05-26,9,0-12,Other,Appendicitis,Surgery,4,8,Private,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+297,2023-06-17,2023-06-23,43,41-60,Other,Infection,General Medicine,4,6,Medicaid,Home,No,Clinical course involved Infection; patient was home.
+298,2023-11-15,2023-11-25,1,0-12,Female,Alzheimer's,Geriatrics,8,10,Medicaid,Home,Yes,Home following treatment for Alzheimer's.
+299,2023-02-07,2023-02-17,72,61+,Female,Heart Failure,ICU,7,10,Medicare,Transferred to Rehab,Yes,Heart Failure managed during admission; status: Transferred to Rehab.
+300,2023-11-01,2023-11-08,34,25-40,Female,Fracture,Orthopedics,3,7,Medicaid,Home,No,Home following treatment for Fracture.
+301,2023-08-24,2023-09-06,68,61+,Male,Heart Failure,ICU,7,13,Medicare,Home,Yes,Patient treated for Heart Failure. Discharge outcome: Home.
+302,2023-05-17,2023-05-23,49,41-60,Other,Diabetes,Endocrinology,4,6,Medicaid,Home,No,Patient case: Diabetes. Final status: Home.
+303,2023-02-04,2023-02-15,33,25-40,Male,Appendicitis,Surgery,7,11,Medicaid,Home,No,Home following treatment for Appendicitis.
+304,2023-03-01,2023-03-10,0,0-12,Female,Pregnancy,Obstetrics,4,9,Medicaid,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+305,2023-09-24,2023-10-03,63,61+,Female,Appendicitis,Surgery,4,9,Private,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+306,2023-10-18,2023-10-27,13,13-24,Other,Infection,General Medicine,6,9,Private,Home,No,Home following treatment for Infection.
+307,2023-12-05,2023-12-15,84,61+,Male,Heart Failure,ICU,7,10,Medicare,Transferred to Rehab,No,Patient treated for Heart Failure. Discharge outcome: Transferred to Rehab.
+308,2023-05-12,2023-05-21,77,61+,Female,Appendicitis,Surgery,6,9,Medicare,Home,No,Clinical course involved Appendicitis; patient was home.
+309,2023-03-30,2023-04-06,88,61+,Female,Infection,General Medicine,4,7,Medicare,Home,No,Patient case: Infection. Final status: Home.
+310,2023-10-22,2023-11-02,17,13-24,Other,Infection,General Medicine,6,11,Private,Home,No,Infection managed during admission; status: Home.
+311,2023-05-05,2023-05-14,13,13-24,Male,Fracture,Orthopedics,5,9,Private,Home,No,Fracture managed during admission; status: Home.
+312,2023-03-04,2023-03-11,37,25-40,Female,Diabetes,Endocrinology,3,7,Private,Home,No,Clinical course involved Diabetes; patient was home.
+313,2023-05-25,2023-05-28,14,13-24,Other,Pregnancy,Obstetrics,1,3,Private,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+314,2023-04-14,2023-04-20,65,61+,Male,Infection,General Medicine,4,6,Medicare,Home,No,Clinical course involved Infection; patient was home.
+315,2023-07-17,2023-07-24,50,41-60,Female,Pregnancy,Obstetrics,3,7,Private,Home,No,Clinical course involved Pregnancy; patient was home.
+316,2023-06-28,2023-07-08,5,0-12,Female,COPD,Pulmonology,6,10,Medicaid,Home,No,Patient case: COPD. Final status: Home.
+317,2023-01-15,2023-01-29,71,61+,Other,Heart Failure,ICU,8,14,Medicare,Home,Yes,Patient case: Heart Failure. Final status: Home.
+318,2023-08-19,2023-08-31,28,25-40,Male,Heart Failure,ICU,6,12,Private,Home,No,Home following treatment for Heart Failure.
+319,2023-02-07,2023-02-16,26,25-40,Female,Appendicitis,Surgery,7,9,Medicaid,Transferred to Rehab,Yes,Patient treated for Appendicitis. Discharge outcome: Transferred to Rehab.
+320,2023-10-16,2023-10-19,56,41-60,Female,Pregnancy,Obstetrics,1,3,Private,Home,No,Patient case: Pregnancy. Final status: Home.
+321,2023-01-10,2023-01-17,67,61+,Female,Infection,General Medicine,4,7,Medicare,Home,No,Infection managed during admission; status: Home.
+322,2023-12-19,2023-12-24,4,0-12,Male,Asthma,Pediatrics,3,5,Private,Home,No,Patient case: Asthma. Final status: Home.
+323,2023-10-30,2023-11-10,37,25-40,Male,Stroke,ICU,6,11,Private,Home,No,Clinical course involved Stroke; patient was home.
+324,2023-01-15,2023-01-28,87,61+,Male,COPD,Pulmonology,8,13,Medicare,Transferred to Rehab,Yes,Transferred to Rehab following treatment for COPD.
+325,2023-06-06,2023-06-12,28,25-40,Other,Pregnancy,Obstetrics,4,6,Private,Home,No,Home following treatment for Pregnancy.
+326,2023-06-22,2023-06-30,46,41-60,Other,Asthma,Pediatrics,4,8,Medicare,Home,No,Asthma managed during admission; status: Home.
+327,2023-04-25,2023-05-02,1,0-12,Male,Pregnancy,Obstetrics,3,7,Medicaid,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+328,2023-10-26,2023-11-08,35,25-40,Female,Stroke,ICU,9,13,Private,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Stroke.
+329,2023-01-11,2023-01-17,26,25-40,Other,Pregnancy,Obstetrics,1,6,Medicaid,Home,No,Home following treatment for Pregnancy.
+330,2023-05-14,2023-05-28,73,61+,Female,Heart Failure,ICU,10,14,Medicare,Transferred to Rehab,No,Clinical course involved Heart Failure; patient was transferred to rehab.
+331,2023-12-12,2023-12-24,71,61+,Other,Alzheimer's,Geriatrics,8,12,Medicare,Home,No,Patient treated for Alzheimer's. Discharge outcome: Home.
+332,2023-08-06,2023-08-20,45,41-60,Female,Heart Failure,ICU,8,14,Medicare,Transferred to Rehab,No,Transferred to Rehab following treatment for Heart Failure.
+333,2023-07-29,2023-08-07,12,0-12,Female,Diabetes,Endocrinology,6,9,Private,Home,No,Clinical course involved Diabetes; patient was home.
+334,2023-04-14,2023-04-22,88,61+,Male,Infection,General Medicine,4,8,Medicare,Home,No,Patient treated for Infection. Discharge outcome: Home.
+335,2023-12-22,2024-01-01,59,41-60,Other,Infection,General Medicine,5,10,Private,Home,No,Infection managed during admission; status: Home.
+336,2023-10-20,2023-10-27,67,61+,Female,Fracture,Orthopedics,2,7,Medicare,Home,No,Clinical course involved Fracture; patient was home.
+337,2023-04-02,2023-04-10,71,61+,Male,Fracture,Orthopedics,5,8,Medicare,Home,No,Fracture managed during admission; status: Home.
+338,2023-02-20,2023-02-25,30,25-40,Male,Fracture,Orthopedics,3,5,Medicaid,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+339,2023-10-24,2023-11-04,28,25-40,Male,Alzheimer's,Geriatrics,6,11,Private,Home,No,Patient case: Alzheimer's. Final status: Home.
+340,2023-09-14,2023-09-26,85,61+,Other,Alzheimer's,Geriatrics,8,12,Medicare,Transferred to Rehab,No,Patient case: Alzheimer's. Final status: Transferred to Rehab.
+341,2023-12-12,2023-12-17,45,41-60,Female,Diabetes,Endocrinology,3,5,Private,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+342,2023-11-09,2023-11-19,35,25-40,Female,Alzheimer's,Geriatrics,6,10,Medicaid,Home,No,Alzheimer's managed during admission; status: Home.
+343,2023-02-24,2023-03-08,0,0-12,Other,Stroke,ICU,8,12,Private,Transferred to Rehab,Yes,Patient treated for Stroke. Discharge outcome: Transferred to Rehab.
+344,2023-11-05,2023-11-12,39,25-40,Male,Diabetes,Endocrinology,5,7,Medicaid,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+345,2023-11-09,2023-11-22,8,0-12,Other,Heart Failure,ICU,7,13,Private,Transferred to Rehab,No,Patient case: Heart Failure. Final status: Transferred to Rehab.
+346,2023-03-04,2023-03-15,25,25-40,Other,Stroke,ICU,6,11,Private,Home,No,Patient case: Stroke. Final status: Home.
+347,2023-10-21,2023-10-26,24,13-24,Other,Asthma,Pediatrics,2,5,Private,Home,No,Home following treatment for Asthma.
+348,2023-12-13,2023-12-20,1,0-12,Other,Fracture,Orthopedics,4,7,Uninsured,Home,No,Home following treatment for Fracture.
+349,2023-12-30,2024-01-09,16,13-24,Male,Diabetes,Endocrinology,6,10,Uninsured,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+350,2023-01-25,2023-02-02,50,41-60,Other,Fracture,Orthopedics,3,8,Private,Home,No,Home following treatment for Fracture.
+351,2023-12-10,2023-12-20,70,61+,Female,Infection,General Medicine,7,10,Medicare,Transferred to Rehab,Yes,Infection managed during admission; status: Transferred to Rehab.
+352,2023-03-04,2023-03-07,32,25-40,Female,Pregnancy,Obstetrics,1,3,Private,Home,No,Pregnancy managed during admission; status: Home.
+353,2023-02-18,2023-02-28,21,13-24,Other,Appendicitis,Surgery,5,10,Private,Home,No,Appendicitis managed during admission; status: Home.
+354,2023-12-27,2024-01-05,70,61+,Male,Diabetes,Endocrinology,4,9,Medicare,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+355,2023-12-08,2023-12-15,48,41-60,Other,Pregnancy,Obstetrics,4,7,Private,Home,No,Patient case: Pregnancy. Final status: Home.
+356,2023-12-26,2024-01-03,91,61+,Male,Diabetes,Endocrinology,6,8,Medicare,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+357,2023-08-12,2023-08-18,48,41-60,Other,Fracture,Orthopedics,4,6,Uninsured,Home,No,Fracture managed during admission; status: Home.
+358,2023-07-30,2023-08-05,12,0-12,Other,Pregnancy,Obstetrics,2,6,Private,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+359,2023-10-12,2023-10-21,61,61+,Female,Infection,General Medicine,6,9,Private,Home,No,Infection managed during admission; status: Home.
+360,2023-10-13,2023-10-18,48,41-60,Male,Infection,General Medicine,3,5,Private,Home,No,Home following treatment for Infection.
+361,2023-01-18,2023-01-28,15,13-24,Other,Diabetes,Endocrinology,6,10,Private,Home,No,Diabetes managed during admission; status: Home.
+362,2023-06-24,2023-06-29,0,0-12,Male,Asthma,Pediatrics,2,5,Private,Home,No,Home following treatment for Asthma.
+363,2023-04-23,2023-04-29,65,61+,Male,Asthma,Pediatrics,2,6,Medicare,Home,No,Clinical course involved Asthma; patient was home.
+364,2023-11-15,2023-11-28,93,61+,Male,Heart Failure,ICU,8,13,Medicare,Transferred to Rehab,No,Patient case: Heart Failure. Final status: Transferred to Rehab.
+365,2023-02-24,2023-03-04,3,0-12,Other,Infection,General Medicine,3,8,Private,Home,No,Infection managed during admission; status: Home.
+366,2023-06-11,2023-06-19,2,0-12,Other,Fracture,Orthopedics,5,8,Medicare,Home,No,Clinical course involved Fracture; patient was home.
+367,2023-10-15,2023-10-25,86,61+,Male,Fracture,Orthopedics,5,10,Medicare,Home,No,Patient case: Fracture. Final status: Home.
+368,2023-01-08,2023-01-17,49,41-60,Male,Alzheimer's,Geriatrics,7,9,Medicaid,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Alzheimer's.
+369,2023-11-19,2023-11-27,64,61+,Other,COPD,Pulmonology,4,8,Medicaid,Home,No,Home following treatment for COPD.
+370,2023-09-12,2023-09-22,87,61+,Male,Infection,General Medicine,6,10,Medicare,Home,No,Clinical course involved Infection; patient was home.
+371,2023-08-27,2023-09-05,71,61+,Female,Alzheimer's,Geriatrics,7,9,Medicare,Home,Yes,Patient case: Alzheimer's. Final status: Home.
+372,2023-04-02,2023-04-11,66,61+,Female,Alzheimer's,Geriatrics,7,9,Medicare,Home,No,Patient case: Alzheimer's. Final status: Home.
+373,2023-04-06,2023-04-12,7,0-12,Other,Pregnancy,Obstetrics,2,6,Uninsured,Home,No,Clinical course involved Pregnancy; patient was home.
+374,2023-04-30,2023-05-09,87,61+,Other,Fracture,Orthopedics,4,9,Medicare,Home,No,Fracture managed during admission; status: Home.
+375,2023-06-14,2023-06-26,45,41-60,Male,Alzheimer's,Geriatrics,7,12,Private,Home,No,Patient case: Alzheimer's. Final status: Home.
+376,2023-08-11,2023-08-18,53,41-60,Male,COPD,Pulmonology,4,7,Private,Home,No,Clinical course involved COPD; patient was home.
+377,2023-01-07,2023-01-18,54,41-60,Female,Alzheimer's,Geriatrics,8,11,Private,Home,Yes,Clinical course involved Alzheimer's; patient was home.
+378,2023-05-31,2023-06-08,73,61+,Female,Diabetes,Endocrinology,6,8,Medicare,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+379,2023-02-05,2023-02-20,84,61+,Female,Stroke,ICU,9,15,Medicare,Expired,Yes,Stroke managed during admission; status: Expired.
+380,2023-01-02,2023-01-09,28,25-40,Male,Pregnancy,Obstetrics,4,7,Uninsured,Home,No,Pregnancy managed during admission; status: Home.
+381,2023-01-11,2023-01-22,0,0-12,Male,Stroke,ICU,8,11,Medicaid,Transferred to Rehab,Yes,Stroke managed during admission; status: Transferred to Rehab.
+382,2023-04-29,2023-05-07,1,0-12,Male,Fracture,Orthopedics,4,8,Private,Home,No,Home following treatment for Fracture.
+383,2023-10-20,2023-10-27,11,0-12,Other,Fracture,Orthopedics,5,7,Medicaid,Home,No,Home following treatment for Fracture.
+384,2023-08-14,2023-08-24,37,25-40,Female,Appendicitis,Surgery,7,10,Private,Transferred to Rehab,Yes,Clinical course involved Appendicitis; patient was transferred to rehab.
+385,2023-12-08,2023-12-19,52,41-60,Other,Appendicitis,Surgery,7,11,Private,Transferred to Rehab,Yes,Appendicitis managed during admission; status: Transferred to Rehab.
+386,2023-06-07,2023-06-17,23,13-24,Male,Stroke,ICU,6,10,Private,Home,No,Patient case: Stroke. Final status: Home.
+387,2023-05-08,2023-05-20,58,41-60,Female,Heart Failure,ICU,7,12,Medicare,Transferred to Rehab,No,Patient treated for Heart Failure. Discharge outcome: Transferred to Rehab.
+388,2023-07-28,2023-08-06,80,61+,Other,Infection,General Medicine,5,9,Medicare,Home,No,Patient case: Infection. Final status: Home.
+389,2023-08-25,2023-09-01,13,13-24,Male,Fracture,Orthopedics,2,7,Private,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+390,2023-09-03,2023-09-10,24,13-24,Other,Diabetes,Endocrinology,5,7,Private,Home,No,Home following treatment for Diabetes.
+391,2023-01-04,2023-01-16,21,13-24,Male,Heart Failure,ICU,8,12,Uninsured,Transferred to Rehab,Yes,Patient case: Heart Failure. Final status: Transferred to Rehab.
+392,2023-04-19,2023-04-25,25,25-40,Other,Infection,General Medicine,4,6,Medicare,Home,No,Home following treatment for Infection.
+393,2023-11-22,2023-12-04,86,61+,Female,Stroke,ICU,7,12,Medicare,Transferred to Rehab,No,Stroke managed during admission; status: Transferred to Rehab.
+394,2023-02-11,2023-02-23,17,13-24,Other,Stroke,ICU,9,12,Private,Transferred to Rehab,Yes,Patient treated for Stroke. Discharge outcome: Transferred to Rehab.
+395,2023-01-17,2023-01-24,40,25-40,Other,Diabetes,Endocrinology,4,7,Private,Home,No,Diabetes managed during admission; status: Home.
+396,2023-03-17,2023-03-23,36,25-40,Other,Diabetes,Endocrinology,3,6,Medicaid,Home,No,Clinical course involved Diabetes; patient was home.
+397,2023-12-08,2023-12-17,86,61+,Other,Alzheimer's,Geriatrics,6,9,Medicare,Home,No,Home following treatment for Alzheimer's.
+398,2023-10-14,2023-10-21,84,61+,Other,Fracture,Orthopedics,5,7,Medicare,Home,No,Clinical course involved Fracture; patient was home.
+399,2023-04-08,2023-04-20,5,0-12,Male,Alzheimer's,Geriatrics,7,12,Medicaid,Transferred to Rehab,Yes,Patient treated for Alzheimer's. Discharge outcome: Transferred to Rehab.
+400,2023-11-05,2023-11-11,11,0-12,Female,COPD,Pulmonology,4,6,Medicare,Home,No,Patient case: COPD. Final status: Home.
+401,2023-07-09,2023-07-17,70,61+,Female,COPD,Pulmonology,6,8,Medicare,Home,No,Patient treated for COPD. Discharge outcome: Home.
+402,2023-11-06,2023-11-12,45,41-60,Other,Asthma,Pediatrics,4,6,Private,Home,No,Patient treated for Asthma. Discharge outcome: Home.
+403,2023-10-19,2023-10-26,64,61+,Other,Diabetes,Endocrinology,5,7,Private,Home,No,Diabetes managed during admission; status: Home.
+404,2023-09-24,2023-09-27,25,25-40,Female,Pregnancy,Obstetrics,1,3,Medicaid,Home,No,Home following treatment for Pregnancy.
+405,2023-06-13,2023-06-22,39,25-40,Female,Fracture,Orthopedics,4,9,Private,Home,No,Home following treatment for Fracture.
+406,2023-08-15,2023-08-25,58,41-60,Female,Infection,General Medicine,5,10,Private,Home,No,Patient treated for Infection. Discharge outcome: Home.
+407,2023-04-21,2023-04-27,53,41-60,Other,Pregnancy,Obstetrics,2,6,Private,Home,No,Patient case: Pregnancy. Final status: Home.
+408,2023-03-10,2023-03-17,23,13-24,Male,Infection,General Medicine,4,7,Private,Home,No,Patient treated for Infection. Discharge outcome: Home.
+409,2023-02-05,2023-02-11,55,41-60,Male,Diabetes,Endocrinology,3,6,Medicaid,Home,No,Diabetes managed during admission; status: Home.
+410,2023-09-01,2023-09-11,19,13-24,Female,Appendicitis,Surgery,6,10,Medicaid,Home,No,Clinical course involved Appendicitis; patient was home.
+411,2023-12-31,2024-01-11,80,61+,Other,Alzheimer's,Geriatrics,7,11,Medicare,Transferred to Rehab,Yes,Alzheimer's managed during admission; status: Transferred to Rehab.
+412,2023-03-14,2023-03-20,72,61+,Other,Pregnancy,Obstetrics,3,6,Medicare,Home,No,Pregnancy managed during admission; status: Home.
+413,2023-05-09,2023-05-22,72,61+,Other,Stroke,ICU,10,13,Medicare,Transferred to Rehab,No,Stroke managed during admission; status: Transferred to Rehab.
+414,2023-04-14,2023-04-21,88,61+,Other,Fracture,Orthopedics,3,7,Medicare,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+415,2023-10-18,2023-10-26,41,41-60,Male,Appendicitis,Surgery,4,8,Medicaid,Home,No,Home following treatment for Appendicitis.
+416,2023-04-18,2023-04-23,2,0-12,Male,Fracture,Orthopedics,3,5,Private,Home,No,Fracture managed during admission; status: Home.
+417,2023-04-12,2023-04-18,43,41-60,Female,Pregnancy,Obstetrics,3,6,Uninsured,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+418,2023-02-13,2023-02-19,11,0-12,Other,Fracture,Orthopedics,4,6,Medicaid,Home,No,Fracture managed during admission; status: Home.
+419,2023-01-17,2023-01-26,58,41-60,Female,Alzheimer's,Geriatrics,7,9,Medicare,Home,No,Home following treatment for Alzheimer's.
+420,2023-10-30,2023-11-08,73,61+,Female,COPD,Pulmonology,5,9,Medicare,Home,No,Clinical course involved COPD; patient was home.
+421,2023-08-04,2023-08-17,11,0-12,Male,Stroke,ICU,7,13,Private,Home,Yes,Patient case: Stroke. Final status: Home.
+422,2023-05-29,2023-06-10,82,61+,Male,COPD,Pulmonology,8,12,Medicare,Home,No,Clinical course involved COPD; patient was home.
+423,2023-07-17,2023-07-26,80,61+,Other,COPD,Pulmonology,7,9,Medicare,Transferred to Rehab,No,Clinical course involved COPD; patient was transferred to rehab.
+424,2023-03-30,2023-04-05,71,61+,Male,Fracture,Orthopedics,3,6,Medicare,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+425,2023-12-31,2024-01-08,11,0-12,Female,Fracture,Orthopedics,4,8,Medicaid,Home,No,Home following treatment for Fracture.
+426,2023-09-23,2023-10-03,25,25-40,Male,Diabetes,Endocrinology,5,10,Medicaid,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+427,2023-10-09,2023-10-16,15,13-24,Other,Infection,General Medicine,5,7,Private,Home,No,Infection managed during admission; status: Home.
+428,2023-09-27,2023-10-04,84,61+,Male,Fracture,Orthopedics,4,7,Medicare,Home,No,Fracture managed during admission; status: Home.
+429,2023-05-17,2023-05-22,78,61+,Other,Asthma,Pediatrics,2,5,Medicare,Home,No,Patient treated for Asthma. Discharge outcome: Home.
+430,2023-11-11,2023-11-19,47,41-60,Male,Fracture,Orthopedics,5,8,Private,Home,No,Home following treatment for Fracture.
+431,2023-08-11,2023-08-18,86,61+,Male,Diabetes,Endocrinology,4,7,Medicare,Home,No,Patient case: Diabetes. Final status: Home.
+432,2023-04-13,2023-04-24,93,61+,Other,Diabetes,Endocrinology,7,11,Medicare,Transferred to Rehab,No,Clinical course involved Diabetes; patient was transferred to rehab.
+433,2023-06-01,2023-06-13,16,13-24,Other,Heart Failure,ICU,7,12,Medicaid,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Heart Failure.
+434,2023-05-11,2023-05-15,59,41-60,Other,Pregnancy,Obstetrics,1,4,Medicaid,Home,No,Patient case: Pregnancy. Final status: Home.
+435,2023-07-02,2023-07-11,36,25-40,Male,Fracture,Orthopedics,4,9,Uninsured,Home,No,Patient treated for Fracture. Discharge outcome: Home.
+436,2023-01-15,2023-01-28,86,61+,Female,Alzheimer's,Geriatrics,9,13,Medicare,Expired,No,Alzheimer's managed during admission; status: Expired.
+437,2023-07-29,2023-08-04,3,0-12,Male,Infection,General Medicine,3,6,Medicaid,Home,No,Clinical course involved Infection; patient was home.
+438,2023-04-18,2023-04-24,32,25-40,Male,Pregnancy,Obstetrics,4,6,Medicare,Home,No,Patient treated for Pregnancy. Discharge outcome: Home.
+439,2023-06-19,2023-06-28,65,61+,Male,Infection,General Medicine,5,9,Medicare,Home,No,Clinical course involved Infection; patient was home.
+440,2023-09-04,2023-09-11,33,25-40,Female,Fracture,Orthopedics,3,7,Private,Home,No,Clinical course involved Fracture; patient was home.
+441,2023-04-06,2023-04-12,12,0-12,Female,Infection,General Medicine,3,6,Medicaid,Home,No,Patient treated for Infection. Discharge outcome: Home.
+442,2023-01-29,2023-02-04,38,25-40,Female,Asthma,Pediatrics,2,6,Medicaid,Home,No,Patient case: Asthma. Final status: Home.
+443,2023-11-14,2023-11-18,61,61+,Female,Fracture,Orthopedics,2,4,Medicaid,Home,No,Patient case: Fracture. Final status: Home.
+444,2023-08-24,2023-09-08,56,41-60,Other,Heart Failure,ICU,9,15,Uninsured,Transferred to Rehab,Yes,Clinical course involved Heart Failure; patient was transferred to rehab.
+445,2023-12-25,2024-01-01,9,0-12,Male,Appendicitis,Surgery,5,7,Medicaid,Home,No,Patient case: Appendicitis. Final status: Home.
+446,2023-06-26,2023-07-03,83,61+,Female,Appendicitis,Surgery,5,7,Medicare,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+447,2023-06-07,2023-06-17,2,0-12,Male,Heart Failure,ICU,6,10,Private,Home,No,Patient case: Heart Failure. Final status: Home.
+448,2023-10-20,2023-10-24,67,61+,Female,Asthma,Pediatrics,2,4,Medicare,Home,No,Patient case: Asthma. Final status: Home.
+449,2023-03-14,2023-03-23,24,13-24,Female,Appendicitis,Surgery,7,9,Medicaid,Transferred to Rehab,Yes,Appendicitis managed during admission; status: Transferred to Rehab.
+450,2023-12-10,2023-12-16,14,13-24,Other,COPD,Pulmonology,4,6,Private,Home,No,Home following treatment for COPD.
+451,2023-10-20,2023-11-01,67,61+,Female,Alzheimer's,Geriatrics,8,12,Medicare,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Alzheimer's.
+452,2023-07-17,2023-07-26,60,41-60,Female,Alzheimer's,Geriatrics,5,9,Private,Home,No,Alzheimer's managed during admission; status: Home.
+453,2023-10-29,2023-11-07,38,25-40,Other,Fracture,Orthopedics,5,9,Private,Home,No,Fracture managed during admission; status: Home.
+454,2023-11-29,2023-12-08,87,61+,Other,Diabetes,Endocrinology,6,9,Medicare,Home,No,Home following treatment for Diabetes.
+455,2023-09-17,2023-09-27,24,13-24,Male,Diabetes,Endocrinology,5,10,Medicare,Home,No,Patient treated for Diabetes. Discharge outcome: Home.
+456,2023-12-15,2023-12-23,58,41-60,Female,Asthma,Pediatrics,4,8,Private,Home,No,Asthma managed during admission; status: Home.
+457,2023-08-31,2023-09-03,62,61+,Female,Asthma,Pediatrics,2,3,Private,Home,No,Patient treated for Asthma. Discharge outcome: Home.
+458,2023-11-09,2023-11-16,73,61+,Female,Pregnancy,Obstetrics,4,7,Medicare,Home,No,Patient case: Pregnancy. Final status: Home.
+459,2023-09-16,2023-09-19,89,61+,Female,Asthma,Pediatrics,2,3,Medicare,Home,No,Clinical course involved Asthma; patient was home.
+460,2023-02-23,2023-03-01,5,0-12,Female,Appendicitis,Surgery,4,6,Medicaid,Home,No,Clinical course involved Appendicitis; patient was home.
+461,2023-01-09,2023-01-18,46,41-60,Male,Alzheimer's,Geriatrics,7,9,Medicaid,Home,Yes,Home following treatment for Alzheimer's.
+462,2023-03-02,2023-03-12,19,13-24,Male,Heart Failure,ICU,7,10,Uninsured,Home,No,Clinical course involved Heart Failure; patient was home.
+463,2023-03-03,2023-03-10,34,25-40,Other,Diabetes,Endocrinology,4,7,Private,Home,No,Diabetes managed during admission; status: Home.
+464,2023-06-09,2023-06-20,16,13-24,Female,Appendicitis,Surgery,7,11,Private,Home,No,Patient case: Appendicitis. Final status: Home.
+465,2023-03-30,2023-04-11,12,0-12,Male,Heart Failure,ICU,9,12,Medicaid,Transferred to Rehab,No,Transferred to Rehab following treatment for Heart Failure.
+466,2023-12-23,2024-01-06,72,61+,Female,Stroke,ICU,10,14,Medicare,Transferred to Rehab,No,Clinical course involved Stroke; patient was transferred to rehab.
+467,2023-11-19,2023-11-27,10,0-12,Female,Infection,General Medicine,3,8,Private,Home,No,Home following treatment for Infection.
+468,2023-07-14,2023-07-22,91,61+,Other,Alzheimer's,Geriatrics,6,8,Medicare,Home,No,Patient case: Alzheimer's. Final status: Home.
+469,2023-06-19,2023-06-29,24,13-24,Female,Appendicitis,Surgery,5,10,Medicaid,Home,No,Patient treated for Appendicitis. Discharge outcome: Home.
+470,2023-01-25,2023-02-08,8,0-12,Male,Heart Failure,ICU,8,14,Private,Transferred to Rehab,No,Heart Failure managed during admission; status: Transferred to Rehab.
+471,2023-08-14,2023-08-20,4,0-12,Male,Asthma,Pediatrics,3,6,Medicaid,Home,No,Home following treatment for Asthma.
+472,2023-02-07,2023-02-22,87,61+,Other,Stroke,ICU,10,15,Medicare,Expired,Yes,Clinical course involved Stroke; patient was expired.
+473,2023-06-25,2023-07-03,71,61+,Other,Diabetes,Endocrinology,6,8,Medicare,Home,No,Home following treatment for Diabetes.
+474,2023-02-06,2023-02-16,89,61+,Other,Alzheimer's,Geriatrics,7,10,Medicare,Transferred to Rehab,No,Clinical course involved Alzheimer's; patient was transferred to rehab.
+475,2023-10-11,2023-10-20,59,41-60,Female,Appendicitis,Surgery,7,9,Medicaid,Transferred to Rehab,Yes,Appendicitis managed during admission; status: Transferred to Rehab.
+476,2023-04-24,2023-04-29,68,61+,Other,Diabetes,Endocrinology,3,5,Medicare,Home,No,Patient case: Diabetes. Final status: Home.
+477,2023-11-14,2023-11-22,39,25-40,Other,Infection,General Medicine,3,8,Private,Home,No,Patient case: Infection. Final status: Home.
+478,2023-11-19,2023-11-30,92,61+,Female,Alzheimer's,Geriatrics,8,11,Medicare,Home,Yes,Patient treated for Alzheimer's. Discharge outcome: Home.
+479,2023-02-09,2023-02-19,55,41-60,Female,Appendicitis,Surgery,7,10,Medicaid,Transferred to Rehab,No,Patient treated for Appendicitis. Discharge outcome: Transferred to Rehab.
+480,2023-10-16,2023-10-24,90,61+,Other,Alzheimer's,Geriatrics,6,8,Medicare,Home,No,Alzheimer's managed during admission; status: Home.
+481,2023-12-02,2023-12-13,5,0-12,Other,Appendicitis,Surgery,7,11,Medicare,Transferred to Rehab,No,Clinical course involved Appendicitis; patient was transferred to rehab.
+482,2023-02-28,2023-03-09,39,25-40,Other,Appendicitis,Surgery,7,9,Medicaid,Home,Yes,Clinical course involved Appendicitis; patient was home.
+483,2023-09-26,2023-10-05,58,41-60,Male,Appendicitis,Surgery,7,9,Private,Home,Yes,Appendicitis managed during admission; status: Home.
+484,2023-06-19,2023-06-23,44,41-60,Female,Fracture,Orthopedics,2,4,Private,Home,No,Clinical course involved Fracture; patient was home.
+485,2023-07-07,2023-07-15,62,61+,Female,Infection,General Medicine,5,8,Medicaid,Home,No,Home following treatment for Infection.
+486,2023-02-14,2023-02-25,6,0-12,Other,Stroke,ICU,6,11,Medicaid,Home,No,Patient case: Stroke. Final status: Home.
+487,2023-01-31,2023-02-07,57,41-60,Male,Infection,General Medicine,3,7,Private,Home,No,Home following treatment for Infection.
+488,2023-06-09,2023-06-14,22,13-24,Other,Pregnancy,Obstetrics,2,5,Private,Home,No,Clinical course involved Pregnancy; patient was home.
+489,2023-03-23,2023-03-31,52,41-60,Female,Infection,General Medicine,4,8,Private,Home,No,Infection managed during admission; status: Home.
+490,2023-01-12,2023-01-19,1,0-12,Other,COPD,Pulmonology,5,7,Medicaid,Home,No,Clinical course involved COPD; patient was home.
+491,2023-01-13,2023-01-23,38,25-40,Male,COPD,Pulmonology,5,10,Medicare,Home,No,Clinical course involved COPD; patient was home.
+492,2023-08-21,2023-08-29,45,41-60,Female,COPD,Pulmonology,6,8,Medicaid,Home,No,Home following treatment for COPD.
+493,2023-12-20,2024-01-01,16,13-24,Female,Alzheimer's,Geriatrics,8,12,Medicaid,Transferred to Rehab,No,Alzheimer's managed during admission; status: Transferred to Rehab.
+494,2023-12-31,2024-01-15,59,41-60,Female,Heart Failure,ICU,9,15,Medicaid,Transferred to Rehab,No,Transferred to Rehab following treatment for Heart Failure.
+495,2023-03-15,2023-03-23,34,25-40,Female,Fracture,Orthopedics,5,8,Private,Home,No,Fracture managed during admission; status: Home.
+496,2023-12-01,2023-12-16,62,61+,Other,Heart Failure,ICU,9,15,Private,Transferred to Rehab,Yes,Transferred to Rehab following treatment for Heart Failure.
+497,2023-10-05,2023-10-08,93,61+,Male,Asthma,Pediatrics,2,3,Medicare,Home,No,Patient case: Asthma. Final status: Home.
+498,2023-08-30,2023-09-10,67,61+,Female,Infection,General Medicine,6,11,Medicare,Home,No,Infection managed during admission; status: Home.
+499,2023-01-17,2023-01-31,67,61+,Male,Heart Failure,ICU,8,14,Medicare,Transferred to Rehab,No,Clinical course involved Heart Failure; patient was transferred to rehab.
+500,2023-07-12,2023-07-18,11,0-12,Male,Infection,General Medicine,4,6,Private,Home,No,Clinical course involved Infection; patient was home.
