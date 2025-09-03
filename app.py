@@ -85,7 +85,7 @@ def update_graph_readmission_count_per_month(pathname):
     # Dark layout styling
     fig.update_layout(
         width=1000,
-        height=500,
+        height=650,
         title_font=dict(size=26, color='white'),
         xaxis=dict(
             tickmode='array',
@@ -151,4 +151,4 @@ def update_graph(month):
     return fig
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, dev_tools_hot_reload=True, dev_tools_silence_routes_logging=True)
