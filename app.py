@@ -5,12 +5,12 @@ import plotly.express as px
 import pandas as pd
 import random
 import dash_bootstrap_components as dbc
-from sklearn.preprocessing import LabelEncoder
-
 from datetime import datetime
 
-data = pd.read_csv('Datasets/HCP.csv')
-le = LabelEncoder()
+#Utilities
+from utilities import get_month_number, get_months, get_doctor_names, get_data, graphConfig
+
+data = get_data()
 
 data['Month'] = data['dischargedate'].apply(
 
@@ -20,17 +20,6 @@ data['Month'] = data['dischargedate'].apply(
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 
-months = {
-    1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June',
-    7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'
-}
-month_options = list(months.values())
-
-def get_month_number(month_name):
-    for number, name in months.items():
-        if name == month_name:
-            return number
-    return None
 
 app.layout = [
     html.H1(children='Hospital Readmission Dashboard for Analysis', style={'textAlign':'center'}),
@@ -38,8 +27,8 @@ app.layout = [
     html.Br(),
     html.Br(),
     dcc.Dropdown(
-        options=month_options,
-        value=random.choice(month_options),
+        options=get_months(),
+        value=random.choice(get_months()),
         id='dropdown-selection-months',
         # The 'style' property allows you to apply inline CSS
         style={
@@ -49,14 +38,32 @@ app.layout = [
         }
     ),
     
-    dcc.Graph(id='graph-content'),
+    dcc.Graph(id='graph-content', config=graphConfig),
 
     html.Br(),
     html.Br(),
 
     dcc.Location(id='url', refresh=False),
-    dcc.Graph(id='graph-content-readmission-count-per-month')
+    dcc.Graph(id='graph-content-readmission-count-per-month', config=graphConfig),
+
+    html.Br(),
+    dcc.Dropdown(
+        options=get_doctor_names(),
+        value = random.choice(get_doctor_names()),
+        id='dropdown-selection-doctors',
+        style={
+            'width': '50%',             
+            'margin': '0 auto',         
+            'color': '#212121'          
+        }
+    ),
+
+    dcc.Graph(id='graph-content-los-comparison', config = graphConfig),
+    html.Br()
 ]
+
+
+# ----- Callback Functions ------
 
 @callback(
         Output('graph-content-readmission-count-per-month', 'figure'),
@@ -64,9 +71,7 @@ app.layout = [
 )
 def update_graph_readmission_count_per_month(pathname):
 
-    data['readmitted'] = le.fit_transform(data['readmitted'])
     map1 = data.groupby(['Month'])['readmitted'].count()
-
     dark_colors = px.colors.sequential.Viridis
 
 # Create bar chart
@@ -146,6 +151,60 @@ def update_graph(month):
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
         font_color='white'
+    )
+
+    return fig
+
+
+@callback(
+
+    Output('graph-content-los-comparison', 'figure'),
+    Input('dropdown-selection-doctors', 'value')
+)
+def update_graph(value):
+    plot3_data = data.groupby(['doctorname', 'severity', 'diagnosis'])['length_of_stay'].mean()
+    plot3_data_glob = data.groupby(['severity', 'diagnosis'])['length_of_stay'].mean()
+
+    plot3_data = plot3_data.reset_index()
+    plot3_data_glob = plot3_data_glob.reset_index()
+
+
+    plot3_data = pd.merge(plot3_data, plot3_data_glob, on=['severity', 'diagnosis'], how='inner')
+
+
+    plot3_data['length_of_stay_y'] = plot3_data['length_of_stay_y'].astype(int)
+    plot3_data['length_of_stay_x'] = plot3_data['length_of_stay_x'].astype(int)
+
+    plot3_data.rename(columns={
+        'length_of_stay_x': 'Doctor Average LOS',
+        'length_of_stay_y': 'Global Average LOS'
+    }, inplace=True)
+
+    plot3_data = plot3_data[plot3_data['doctorname'] == value]
+
+
+    fig = px.bar(
+        plot3_data,
+        x="diagnosis",  # diseases on x-axis
+        y=["Doctor Average LOS", "Global Average LOS"],  # grouped bars
+        barmode="group",
+        title=f"Length of Stay: {value} vs Global Averages",
+    )
+
+
+    fig.update_layout(
+        template="plotly_dark",          # dark background
+        plot_bgcolor="black",            # black plotting area
+        paper_bgcolor="black",           # black outside
+        font=dict(size=16, color="white"),  # bigger readable font
+        title=dict(font=dict(size=22)),  # bigger title
+        legend=dict(
+            title="Comparison",
+            font=dict(size=14, color="white")
+        ),
+        xaxis=dict(title="Diagnosis", tickangle=-30),  # rotate x labels
+        yaxis=dict(title="Length of Stay (days)"),
+        height=650, width=1500           # bigger figure size
     )
 
     return fig
