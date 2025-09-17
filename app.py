@@ -8,7 +8,10 @@ import dash_bootstrap_components as dbc
 from datetime import datetime
 
 #Utilities
-from utilities import get_month_number, get_months, get_doctor_names, get_data, graphConfig
+from utilities import get_month_number, get_months, get_doctor_names, get_data, graphConfig, get_department_names, get_diagnosis
+
+#Components 
+from components.navbar import navbar_layout
 
 data = get_data()
 
@@ -59,7 +62,36 @@ app.layout = [
     ),
 
     dcc.Graph(id='graph-content-los-comparison', config = graphConfig),
-    html.Br()
+
+    html.Br(),
+    dcc.Dropdown(
+
+        options = get_department_names(),
+        value = random.choice(get_department_names()),
+        id = 'dropdown-selection-departments',
+        style = {    
+            'width': '50%',             
+            'margin': '0 auto',         
+            'color': '#212121'          
+        }
+    ),
+ 
+    html.Br(),
+
+    dcc.Dropdown(
+
+        options = get_diagnosis(),
+        value = random.choice(get_diagnosis()),
+        id = 'dropdown-selection-diagnosis',
+        style = {    
+            'width': '50%',             
+            'margin': '0 auto',         
+            'color': '#212121'          
+        }
+    ),
+    
+    dcc.Graph(id = 'graph-content-total-vs-readmitted-comparison', config=graphConfig),
+    html.Br(),
 ]
 
 

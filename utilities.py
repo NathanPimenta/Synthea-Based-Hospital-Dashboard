@@ -37,5 +37,12 @@ def get_data():
 )
     return data
 
+
+def get_department_names() -> list:
+    return list(data['department'])
+
+def get_diagnosis() -> list:
+    return list(data['diagnosis'])
+
 if __name__ == "__main__":
     get_doctor_names()
