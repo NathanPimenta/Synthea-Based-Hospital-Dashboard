@@ -90,7 +90,7 @@ app.layout = [
         }
     ),
     
-    dcc.Graph(id = 'graph-content-total-vs-readmitted-comparison', config=graphConfig),
+    dcc.Graph(id='graph-content-total-vs-readmitted-comparison', config=graphConfig),
     html.Br(),
 ]
 
@@ -240,6 +240,51 @@ def update_graph(value):
     )
 
     return fig
+
+@callback(
+    
+    Output('graph-content-total-vs-readmitted-comparison', 'figure'),
+    [Input('dropdown-selection-departments', 'value'), Input('dropdown-selection-diagnosis', 'value')]
+)
+def update_graph(dept, diag):
+
+    trickled_data = data[['department', 'diagnosis', 'severity']].value_counts().reset_index()
+    trickled_data = trickled_data.sort_values(by=['department', 'diagnosis', 'severity'], ascending=[1, 1, 1])
+
+
+    trickled_data2 = data.groupby(['department', 'diagnosis', 'severity'])['readmitted'].sum()
+    trickled_data2 = trickled_data2.reset_index()
+    plot4_data = pd.merge(trickled_data, trickled_data2, on=['department', 'diagnosis', 'severity'], how='inner')
+
+    plot4_data = plot4_data[(plot4_data['department'] == dept) & (plot4_data['diagnosis'] == diag)]
+    plot4_data = plot4_data[['severity', 'count', 'readmitted']]
+
+    fig = px.bar(
+
+        plot4_data,
+        x = "severity",
+        y = ["count", "readmitted"],
+        barmode='group',
+        title=f'Total admitted patients and total readmitted patients in {dept} department having {diag}'
+    )
+
+    fig.update_layout(
+
+        template="plotly_dark",          # dark background
+        plot_bgcolor="black",            # black plotting area
+        paper_bgcolor="black",           # black outside
+        font=dict(size=16, color="white"),  # bigger readable font
+        title=dict(font=dict(size=22)),  # bigger title
+        legend=dict(
+        title="Comparison",
+        font=dict(size=14, color="white")),
+        xaxis=dict(title="Severity"),  # rotate x labels
+        yaxis=dict(title="Patient Count"),
+        height=650, width=1200     # bigger figure size
+    )
+
+    return fig
+
 
 if __name__ == '__main__':
     app.run(debug=True, dev_tools_hot_reload=True, dev_tools_silence_routes_logging=True)

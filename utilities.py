@@ -35,6 +35,9 @@ def get_data():
     data['Month'] = data['dischargedate'].apply(
     lambda dt: ((((datetime.strptime(dt, '%Y-%m-%d')).month)% 12)) + 1
 )
+
+    data['gender'] = le.fit_transform(data['gender'])
+
     return data
 
 
