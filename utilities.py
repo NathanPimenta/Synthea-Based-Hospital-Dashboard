@@ -42,10 +42,10 @@ def get_data():
 
 
 def get_department_names() -> list:
-    return list(data['department'])
+    return list(data['department'].unique())
 
 def get_diagnosis() -> list:
-    return list(data['diagnosis'])
+    return list(data['diagnosis'].unique())
 
 if __name__ == "__main__":
     get_doctor_names()

@@ -1,0 +1,156 @@
+/* === Global Layout === */
+body {
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.main-layout {
+    padding: 20px;
+    text-align: center;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+/* === Base Dropdown Styling === */
+.neon-dropdown .Select-control {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    border-radius: 6px;
+    min-height: 38px;
+    font-size: 14px;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.neon-dropdown .Select-placeholder,
+.neon-dropdown .Select-value-label {
+    color: #e0e0e0 !important;
+}
+
+.neon-dropdown .Select-menu-outer {
+    background-color: #1a1a1a !important;
+}
+
+/* === Hover and Selected Options === */
+.neon-dropdown .Select-option.is-focused {
+    background-color: #333333 !important;
+}
+.neon-dropdown .Select-option.is-selected {
+    background-color: #e0e0e0 !important;
+    color: #0d0d0d !important;
+}
+
+/* === Neon Variants === */
+.neon-green .Select-control {
+    border: 1px solid #39ff14 !important;
+    box-shadow: 0 0 6px #39ff14 !important;
+}
+.neon-green .Select-menu-outer {
+    border: 1px solid #39ff14 !important;
+    box-shadow: 0 0 8px #39ff14 !important;
+}
+.neon-green .Select-option.is-focused {
+    color: #39ff14 !important;
+}
+
+.neon-cyan .Select-control {
+    border: 1px solid #00eaff !important;
+    box-shadow: 0 0 6px #00eaff !important;
+}
+.neon-cyan .Select-menu-outer {
+    border: 1px solid #00eaff !important;
+    box-shadow: 0 0 8px #00eaff !important;
+}
+.neon-cyan .Select-option.is-focused {
+    color: #00eaff !important;
+}
+
+.neon-magenta .Select-control {
+    border: 1px solid #ff00ff !important;
+    box-shadow: 0 0 6px #ff00ff !important;
+}
+.neon-magenta .Select-menu-outer {
+    border: 1px solid #ff00ff !important;
+    box-shadow: 0 0 8px #ff00ff !important;
+}
+.neon-magenta .Select-option.is-focused {
+    color: #ff00ff !important;
+}
+
+.neon-orange .Select-control {
+    border: 1px solid #ffae00 !important;
+    box-shadow: 0 0 6px #ffae00 !important;
+}
+.neon-orange .Select-menu-outer {
+    border: 1px solid #ffae00 !important;
+    box-shadow: 0 0 8px #ffae00 !important;
+}
+.neon-orange .Select-option.is-focused {
+    color: #ffae00 !important;
+}
+
+/* === Graphs Styling (Dark + Neon) === */
+.js-plotly-plot .plotly {
+    background-color: #0d0d0d !important;
+}
+
+/* Grid layout */
+.graph-grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.graph-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* For last graph: flex layout */
+.graph-flex {
+    display: flex;
+    flex-direction: column; /* dropdowns on top, graph below */
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Dropdown group (row) */
+.dropdown-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+/* Dropdown styling */
+.neon-dropdown {
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+    border-radius: 6px !important;
+    padding: 3px 5px !important;
+    min-width: 180px;
+    max-width: 220px;
+    font-size: 13px;
+}
+
+/* Dropdown menu overrides */
+.VirtualizedSelectOption {
+    background-color: #111 !important;
+    color: #eee !important;
+}
+.VirtualizedSelectFocusedOption {
+    background-color: #222 !important;
+    color: #39ff14 !important; /* neon highlight */
+}
