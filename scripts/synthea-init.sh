@@ -1,13 +1,15 @@
 #!/bin/bash
 set -e  # exit on error
 
+NUMBER_OF_PATIENTS=${1:-2000}
+
 # --- Initialize paths ---
 PROJ_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 echo "📁 Project Directory: $PROJ_DIR"
 
 REPO_URL="https://github.com/synthetichealth/synthea.git"
 SYNTHEA_DIR="$HOME/synthea"
-DATASET_DIR="$PROJ_DIR/Datasets/csv"
+DATASET_DIR="$PROJ_DIR/Datasets"
 
 # --- Clone or update Synthea ---
 if [ ! -d "$SYNTHEA_DIR" ]; then
@@ -32,24 +34,21 @@ fi
 # Modify export settings using sed
 sed -i 's/^exporter.fhir.export *= *.*/exporter.fhir.export = false/' "$PROPERTIES_FILE"
 sed -i 's/^exporter.csv.export *= *.*/exporter.csv.export = true/' "$PROPERTIES_FILE"
-sed -i 's|^exporter.baseDirectory *= *.*|exporter.baseDirectory = ./output|' "$PROPERTIES_FILE"
+sed -i 's/^exporter.csv.append_mode *= *.*/exporter.csv.append_mode = true/' "$PROPERTIES_FILE"
+sed -i "s|^exporter.baseDirectory *= *.*|exporter.baseDirectory = $DATASET_DIR|" "$PROPERTIES_FILE"
 
 # --- Ensure output directory exists ---
 mkdir -p "$DATASET_DIR"
 
 # --- Generate CSV data ---
 cd "$SYNTHEA_DIR" || exit
-./gradlew clean build test
 
+# -- doing a clean build to ensure everything is up to date --
+./gradlew build 
+
+# --- synthea stores the o/p under the csv dir if above options are set --- 
 echo "🚀 Generating CSV data for 2000 patients..."
-./run_synthea -p 2000 -r 42 -o "$DATASET_DIR"
+./run_synthea -p "$NUMBER_OF_PATIENTS"
 
-# --- Flatten nested csv folder if exists ---
-if [ -d "$DATASET_DIR/csv" ]; then
-    echo "📂 Flattening nested CSV directory..."
-    mv "$DATASET_DIR"/csv/* "$DATASET_DIR"/
-    rm -rf "$DATASET_DIR/csv"
-fi
-
+# cp output/csv/* "$DATASET_DIR"
 echo "✅ CSV datasets generated in: $DATASET_DIR"
-
