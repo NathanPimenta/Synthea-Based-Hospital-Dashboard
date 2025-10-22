@@ -32,7 +32,7 @@ if [ ! -f "$PROPERTIES_FILE" ]; then
 fi
 
 # Modify export settings using sed
-sed -i 's/^exporter.fhir.export *= *.*/exporter.fhir.export = false/' "$PROPERTIES_FILE"
+sed -i 's/^exporter.fhir.export *= *.*/exporter.fhir.export = true/' "$PROPERTIES_FILE"
 sed -i 's/^exporter.csv.export *= *.*/exporter.csv.export = true/' "$PROPERTIES_FILE"
 sed -i 's/^exporter.csv.append_mode *= *.*/exporter.csv.append_mode = true/' "$PROPERTIES_FILE"
 sed -i "s|^exporter.baseDirectory *= *.*|exporter.baseDirectory = $DATASET_DIR|" "$PROPERTIES_FILE"
