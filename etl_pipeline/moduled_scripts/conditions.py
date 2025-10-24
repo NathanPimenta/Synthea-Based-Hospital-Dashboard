@@ -1,39 +1,42 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, upper, trim, to_date, when, regexp_extract
+# conditions_etl.py
+from pyspark.sql.functions import col, to_date, regexp_extract
+from etl_pipeline.master import Master
 
-def extract():
-    conditions_spark = SparkSession.builder.appName("Conditions-ETL").config("spark.driver.memory", "512m").getOrCreate()
-    conditions_data = "../../Datasets/csv/conditions.csv"
-    return conditions_spark, conditions_data
+class ConditionsETL:
 
-def transform(conditions_spark, conditions_data):
-    df = conditions_spark.read.csv(path=conditions_data, header=True, inferSchema=True)
-    print("Data is loaded")
+    _conditionsetlInstance = None
+    _master = Master()
 
+    def __new__(cls):
+        
+        if cls._conditionsetlInstance is None:
+            cls._conditionsetlInstance = super().__new__(cls)
 
-    new_cols_list=["event_start", "event_end", "uuid", "record_id", "_", "event_code", "event_description"]
+        return cls._conditionsetlInstance
 
-    old_cols = df.columns
+    def etl(self):
+        """
+        Load the transformed conditions DataFrame from CSV if not already loaded.
+        """
 
-    for old_col, new_col in zip(old_cols, new_cols_list):
-        df = df.withColumnRenamed(old_col, new_col)
+        path="../../Datasets/csv/conditions.csv"
+        
+        df = self._master._master_spark.read.csv(path, header=True, inferSchema=True)
+        new_cols_list = ["event_start", "event_end", "uuid", "record_id", "_", "event_code", "event_description"]
 
-    df = df.drop(*[col for col in df.columns if col.startswith('_')])
+        for old_col, new_col in zip(df.columns, new_cols_list):
+            df = df.withColumnRenamed(old_col, new_col)
 
-    #Converting date columns to proper date format
-    df = df.withColumn("event_start", to_date(col("event_start"), format="yyyy-MM-dd")).withColumn("event_end", to_date(col("event_end"), format="yyyy-MM-dd"))
+        # Drop placeholder columns
+        df = df.drop(*[col for col in df.columns if col.startswith('_')])
 
-    df = df.withColumn("event_type", regexp_extract(col("event_description"), r"\((.*?)\)$", 1)) \
-       .withColumn("event_description", regexp_extract(col("event_description"), r"^(.*?)\(", 1))
-    
-    print(df.show(7))
-    print(df.columns)
+        # Convert date columns to proper date format
+        df = df.withColumn("event_start", to_date(col("event_start"), "yyyy-MM-dd")) \
+               .withColumn("event_end", to_date(col("event_end"), "yyyy-MM-dd"))
 
-    # ---- Done with the ETL for conditions ---
+        # Extract event type from description
+        df = df.withColumn("event_type", regexp_extract(col("event_description"), r"\((.*?)\)$", 1)) \
+               .withColumn("event_description", regexp_extract(col("event_description"), r"^(.*?)\(", 1))
 
-def load():
-    pass
-
-if __name__ == "__main__":
-    spark_obj, path = extract()
-    transform(spark_obj, path)
+        # Store in singleton
+        self._master.setDataframes("conditions", df)

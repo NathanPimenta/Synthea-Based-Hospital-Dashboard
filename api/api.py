@@ -1,10 +1,18 @@
+import sys
+import os
+
+# Ensuring the project root (one level up) is in sys.path
+project_root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import subprocess
-
+from utilities import main_singleton, patients_singleton, conditions_singleton, procedures_singleton
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)   
 
 @app.route('/', methods=['GET'])
 def root():

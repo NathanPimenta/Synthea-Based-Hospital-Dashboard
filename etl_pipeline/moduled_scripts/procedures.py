@@ -1,39 +1,66 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, upper, trim, to_date, when, regexp_extract
+from pyspark.sql.functions import col, regexp_extract
+from etl_pipeline.master import Master
 
-def extract():
-    procedures_spark = SparkSession.builder.appName("Patients-ETL").config("spark.driver.memory", "512m").getOrCreate()
-    procedures_data = "../../Datasets/csv/procedures.csv"
-    return procedures_spark, procedures_data
+class ProceduresETL:
+    _proceduresetlInstance = None
+    _master = Master()
 
-def transform(procedures_spark, procedures_data):
-    df = procedures_spark.read.csv(path=procedures_data, header=True, inferSchema=True)
-    print("Data is loaded")
+    def __new__(cls):
+        if cls._proceduresetlInstance is None:
+            cls._proceduresetlInstance = super().__new__(cls)
 
-    # --- Column Renaming ---
-    new_cols_list=["performed_from", "performed_till", "uuid", "urn_uuid","_","procedure_code","procedure_description","procedure_cost", "_", "procedure_observations"]
+        return cls._proceduresetlInstance
 
-    old_cols = df.columns
+    def etl(self):
+        """
+        Unified Extract–Transform–Load function for procedures data.
+        """
+        # ✅ Check cache — no reprocessing if already loaded
+        if self._singleton.get_dataframe("procedures"):
+            print("Procedures dataframe already loaded in singleton cache.")
+            return self._singleton.get_dataframe("procedures")
 
-    for old_col, new_col in zip(old_cols, new_cols_list):
-        df = df.withColumnRenamed(old_col, new_col)
-    
-    df = df.drop(*[col for col in df.columns if col.startswith('_')])
+        # --- Extract ---
+        path = "../../Datasets/csv/procedures.csv"
+        spark = self._singleton.spark
+        df = spark.read.csv(path, header=True, inferSchema=True)
+        print("✅ Extract: Procedures data loaded")
 
-    df = df.fillna({"procedure_observations": "No observations recorded (None)"})
+        # --- Transform ---
+        new_cols_list = [
+            "performed_from", "performed_till", "uuid", "urn_uuid", "_",
+            "procedure_code", "procedure_description", "procedure_cost", "_",
+            "procedure_observations"
+        ]
 
-    df = df.withColumn("procedure_type", regexp_extract(col("procedure_description"), r"\((.*?)\)$", 1)) \
-       .withColumn("procedure_description", regexp_extract(col("procedure_description"), r"^(.*?)\(", 1))
-    
-    df = df.withColumn("observation_type", regexp_extract(col("procedure_observations"), r"\((.*?)\)$", 1)) \
-       .withColumn("procedure_observations", regexp_extract(col("procedure_observations"), r"^(.*?)\(", 1))
+        for old_col, new_col in zip(df.columns, new_cols_list):
+            df = df.withColumnRenamed(old_col, new_col)
 
-    print(df.show(150))
-    print(df.columns)
+        # Drop placeholder columns starting with '_'
+        df = df.drop(*[c for c in df.columns if c.startswith('_')])
 
-def load():
-    pass
+        # Fill missing observations
+        df = df.fillna({"procedure_observations": "No observations recorded (None)"})
 
-if __name__ == "__main__":
-    spark_obj, path = extract()
-    transform(spark_obj, path)
+        # Extract description & type info
+        df = df.withColumn("procedure_type", regexp_extract(col("procedure_description"), r"\((.*?)\)$", 1)) \
+               .withColumn("procedure_description", regexp_extract(col("procedure_description"), r"^(.*?)\(", 1))
+
+        df = df.withColumn("observation_type", regexp_extract(col("procedure_observations"), r"\((.*?)\)$", 1)) \
+               .withColumn("procedure_observations", regexp_extract(col("procedure_observations"), r"^(.*?)\(", 1))
+
+        print("✅ Transform: Procedures columns cleaned and enriched")
+
+        # --- Load ---
+        self._master.set_dataframe("procedures", df)
+        print("✅ Load: Procedures dataframe stored in ETLSingleton")
+
+        return df
+
+
+# Optional: Standalone execution
+# if __name__ == "__main__":
+#     proc_etl = ProceduresETL()
+#     df_proc = proc_etl.etl()
+#     df_proc.show(5)
+#     print("Columns:", df_proc.columns)

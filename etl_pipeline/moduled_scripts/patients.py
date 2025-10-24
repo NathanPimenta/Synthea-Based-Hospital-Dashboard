@@ -1,61 +1,54 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, upper, trim, to_date, when, split
+# patients_etl.py
+from pyspark.sql.functions import col, when, split
+from etl_pipeline.master import Master
 import re
 
-def extract():
-    patients_spark = SparkSession.builder.appName("Patients-ETL").config("spark.driver.memory", "512m").getOrCreate()
-    patients_data = "../../Datasets/csv/patients.csv"
-    return patients_spark, patients_data
+class PatientsETL:
 
-def transform(patients_spark, patients_data):
-    df = patients_spark.read.csv(path=patients_data, header=True, inferSchema=True)
-    print("Data is loaded")
-    
-    df = df.drop("_c10", "_c12","Pittsfield  Massachusetts  US", "Middlesex County")
+    __patientsetInstance = None
+    __master = Master()
 
-    # print(df.columns)
+    def __new__(cls):
+        if cls.__patientsetInstance is None:
+            cls.__patientsetInstance = super().__new__(cls)
 
-    new_cols_list=["uuid", "birth_date", "death_date", "social_security_number", "driver's_license_number", "passport_number", "salutation", "first_name",
-                "middle_name", "last_name", "maiden_family", "skin_color", "hispanic", "gender", "address", "city", "state", "postal_code","latitude","longitude",
-                "family_income"]
+        return cls.__patientsetInstance
 
-    old_cols = df.columns
+    def etl(self):
+        """
+        Load the transformed patients DataFrame from CSV if not already loaded.
+        """
 
-    for old_col, new_col in zip(old_cols, new_cols_list):
-        df = df.withColumnRenamed(old_col, new_col)
+        path="../../Datasets/csv/patients.csv"
+        df = self.__master._master_spark.read.csv(path, header=True, inferSchema=True)
+        print("Data is loaded")
 
-    re_patterns = [r'^[-]?[0-9]+.[0-9]+$', r'[0-9]+$']
-    dropped_cols = [col for col in df.columns if re.match(re_patterns[0], col)]
-    df = df.drop(*dropped_cols)
-    
-    df = df.withColumn(
+        # Drop unwanted columns
+        df = df.drop("_c10", "_c12","Pittsfield  Massachusetts  US", "Middlesex County")
 
-        "first_name", split(col("first_name"), pattern=re_patterns[1]).getItem(0)
-    ).withColumn(
-        "middle_name", split(col("middle_name"), pattern=re_patterns[1]).getItem(0)
-    ).withColumn(
-        "last_name", split(col("last_name"), pattern=re_patterns[1]).getItem(0)
-    ).withColumn(
-        "maiden_family", split(col("maiden_family"), pattern=re_patterns[1]).getItem(0)
-    )
+        # Rename columns
+        new_cols_list = ["uuid", "birth_date", "death_date", "social_security_number", "driver's_license_number", 
+                         "passport_number", "salutation", "first_name", "middle_name", "last_name", "maiden_family",
+                         "skin_color", "ancestry", "gender", "address", "city", "state", "postal_code", "latitude",
+                         "longitude", "family_income"]
 
-    #Fiiling NAN values now
+        for old_col, new_col in zip(df.columns, new_cols_list):
+            df = df.withColumnRenamed(old_col, new_col)
 
-    df = df.withColumn(
+        # Drop numeric-looking column names
+        re_patterns = [r'^[-]?[0-9]+.[0-9]+$', r'[0-9]+$']
+        dropped_cols = [col for col in df.columns if re.match(re_patterns[0], col)]
+        df = df.drop(*dropped_cols)
 
-        "salutation",
+        # Clean first, middle, last, maiden names
+        df = df.withColumn("first_name", split(col("first_name"), re_patterns[1]).getItem(0)) \
+               .withColumn("middle_name", split(col("middle_name"), re_patterns[1]).getItem(0)) \
+               .withColumn("last_name", split(col("last_name"), re_patterns[1]).getItem(0)) \
+               .withColumn("maiden_family", split(col("maiden_family"), re_patterns[1]).getItem(0))
 
-        when(col("gender") == "M", "Mr.").otherwise("Ms.")
+        # Fill missing values
+        df = df.withColumn("salutation", when(col("gender") == "M", "Mr.").otherwise("Ms.")) \
+               .fillna({"passport_number": "N/A", "maiden_family": "N/A", "middle_name": "N/A"})
 
-    )
-    df = df.fillna({"passport_number": "N/A","maiden_family": "N/A", "middle_name": "N/A"})
-
-    print(df.show(30))
-    print(df.columns)
-
-def load():
-    pass
-
-if __name__ == "__main__":
-    spark_obj, path = extract()
-    transform(spark_obj, path)
+        # Store in singleton
+        self.__master.setDataframes("patients", df)
