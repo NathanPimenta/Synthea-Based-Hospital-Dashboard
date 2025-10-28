@@ -1,192 +1,66 @@
-import streamlit as st
-from streamlit_lottie import st_lottie
-import requests
-import pandas as pd
-import numpy as np
-import time
-import plotly.express as px
-import matplotlib.pyplot as plt
-import seaborn as sns 
-from dotenv import load_dotenv
-import os
+from pyspark.sql.functions import col, regexp_extract
+from etl_pipeline.master import Master
 
-load_dotenv()
+class ProceduresETL:
+    _proceduresetlInstance = None
+    _master = Master()
 
-API_URL = os.getenv("API_URL")
+    def __new__(cls):
+        if cls._proceduresetlInstance is None:
+            cls._proceduresetlInstance = super().__new__(cls)
 
-def fetch_data(num_patients):
-    response = requests.get(f"{API_URL}/generate_data/{num_patients}")
+        return cls._proceduresetlInstance
 
-    if response.status_code == 200:
-        return response.json()
-    
-    else:
-        return None
-    
-# --- PAGE CONFIG ---
-st.set_page_config(page_title="Synthea Hospital Data Generator", layout="wide", page_icon="🏥")
+    def etl(self):
+        """
+        Unified Extract–Transform–Load function for procedures data.
+        """
+        # ✅ Check cache — no reprocessing if already loaded
+        if self._singleton.get_dataframe("procedures"):
+            print("Procedures dataframe already loaded in singleton cache.")
+            return self._singleton.get_dataframe("procedures")
 
-# --- CUSTOM CSS (Compacting Vertical Space) ---
-st.markdown("""
-<style>
-/* 1. Header Styling */
-.title-header {
-    text-align: center; 
-    color: #0077B6;
-    font-size: 2.5em;
-    margin-bottom: 0px;
-}
-.subtitle-header {
-    text-align: center; 
-    color: #888888;
-    font-size: 1.1em;
-    margin-top: 0px;
-}
-/* 2. COMPACTING VERTICAL MARGINS */
-.stMarkdown h3 {
-    margin-top: 10px;    
-    margin-bottom: 5px;  
-}
-.block-container {
-    padding-top: 1rem;   
-    padding-bottom: 0rem;
-}
-/* 3. Button Styling (Actionable Green) */
-.stButton>button {
-    background-color: #4CAF50;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    padding: 10px 5px;
-    margin: 5px 0;
-    width: 100%;
-}
-/* 4. Metric Styling */
-[data-testid="stMetricValue"] {
-    font-size: 1.8em; 
-}
-[data-testid="stMetricLabel"] {
-    font-size: 0.8em; 
-}
-</style>
-""", unsafe_allow_html=True)
+        # --- Extract ---
+        path = "../../Datasets/csv/procedures.csv"
+        spark = self._singleton.spark
+        df = spark.read.csv(path, header=True, inferSchema=True)
+        print("✅ Extract: Procedures data loaded")
 
-# --- UTILITIES ---
-def load_lottie_url(url):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
+        # --- Transform ---
+        new_cols_list = [
+            "performed_from", "performed_till", "uuid", "urn_uuid", "_",
+            "procedure_code", "procedure_description", "procedure_cost", "_",
+            "procedure_observations"
+        ]
 
-lottie_data = load_lottie_url("https://assets6.lottiefiles.com/packages/lf20_jcikwtux.json")
+        for old_col, new_col in zip(df.columns, new_cols_list):
+            df = df.withColumnRenamed(old_col, new_col)
 
-def handle_generation(num_patients):
-    """Simulates the API call and shows progress."""
-    st.session_state['status_message'] = f"Generating {num_patients:,} patient records..."
-    st.session_state['show_progress'] = True
-    st.session_state['patients_to_generate'] = num_patients
+        # Drop placeholder columns starting with '_'
+        df = df.drop(*[c for c in df.columns if c.startswith('_')])
 
-# --- DATA (Simulated for Charts) ---
-data = pd.DataFrame({
-    'State': ['MA', 'CA', 'TX', 'NY', 'FL', 'OH'],
-    'Patients': [1200, 3100, 2700, 2200, 1800, 1300]
-})
-procedures = pd.DataFrame({
-    'Procedure': ['Surgery', 'Checkup', 'Dental', 'Therapy'],
-    'Count': [1200, 5500, 2200, 3200]
-})
+        # Fill missing observations
+        df = df.fillna({"procedure_observations": "No observations recorded (None)"})
+
+        # Extract description & type info
+        df = df.withColumn("procedure_type", regexp_extract(col("procedure_description"), r"\((.*?)\)$", 1)) \
+               .withColumn("procedure_description", regexp_extract(col("procedure_description"), r"^(.*?)\(", 1))
+
+        df = df.withColumn("observation_type", regexp_extract(col("procedure_observations"), r"\((.*?)\)$", 1)) \
+               .withColumn("procedure_observations", regexp_extract(col("procedure_observations"), r"^(.*?)\(", 1))
+
+        print("✅ Transform: Procedures columns cleaned and enriched")
+
+        # --- Load ---
+        self._master.set_dataframe("procedures", df)
+        print("✅ Load: Procedures dataframe stored in ETLSingleton")
+
+        return df
 
 
-# --- MAIN LAYOUT ---
-
-# ---------------- HEADER & ANIMATION ----------------
-header_col, lottie_col = st.columns([4, 1])
-
-with header_col:
-    st.markdown("<h1 class='title-header'>Hospital Data Generation</h1>", unsafe_allow_html=True)
-    st.markdown("<p class='subtitle-header'>Generate synthetic patient records and monitor metrics</p>", unsafe_allow_html=True)
-    st.markdown("---")
-
-with lottie_col:
-    if lottie_data:
-        st_lottie(lottie_data, height=100, key="data_gen_anim")
-
-
-# ---------------- PRIMARY TWO-COLUMN SPLIT ----------------
-# Left Column: Controls, Metrics | Right Column: Graphs
-left_panel, right_panel = st.columns([1, 1])
-
-
-# --- LEFT PANEL: CONTROLS & METRICS ---
-with left_panel:
-    st.markdown("### 🧬 Data Generation Controls")
-    patients_list = [1000, 2000, 5000, 10000, 15000]
-
-    # BUTTONS: Group into a compact 3-column layout
-    button_cols = st.columns(3)
-    for i, num in enumerate(patients_list):
-        # Dynamically place buttons based on column index
-        col_index = i % 3
-        if button_cols[col_index].button(f"{num:,} Patients", key=f"btn_{num}"):
-            handle_generation(num)
-
-    # --- Progress Bar Simulation ---
-    if 'show_progress' in st.session_state and st.session_state['show_progress']:
-        st.info(st.session_state['status_message'])
-        progress_bar = st.progress(0)
-        
-        for j in range(101):
-            progress_bar.progress(j)
-            time.sleep(0.01) 
-
-        st.success(f"✅ Finished generating {st.session_state['patients_to_generate']:,} records.")
-        st.session_state['show_progress'] = False
-
-    
-    st.markdown("---")
-    st.markdown("### 📈 Current Data Metrics")
-    
-    # METRICS: Display in a compact 2x2 grid
-    m_col1, m_col2 = st.columns(2)
-    m_col3, m_col4 = st.columns(2) 
-
-    # Data fetched from the Master ETL Singleton (Simulated values)
-    m_col1.metric("Total Patients", "12,500", "▲ 2%")
-    m_col2.metric("Procedures Completed", "38,240", "▲ 5%")
-    m_col3.metric("Allergies Recorded", "1,542", "-3%")
-    m_col4.metric("Unique Conditions", "1,010", "▲ 1%")
-
-
-# --- RIGHT PANEL: GRAPHS & VISUAL INSIGHTS ---
-with right_panel:
-    st.markdown("### 📊 Quick Visual Insights")
-    
-    # Use st.expander for a clean start to the visualization section
-    with st.expander("Analytical Charts", expanded=True):
-        
-        # Plotly Bar Chart
-        st.subheader("Patients per State (Utilization)")
-        fig_bar = px.bar(
-            data, 
-            x='State', 
-            y='Patients', 
-            title='Patient Volume by State',
-            color='State'
-        )
-        st.plotly_chart(fig_bar, use_container_width=True)
-
-        st.markdown("---") # Separator between graphs
-
-        # Plotly Pie Chart
-        st.subheader("Procedures Breakdown")
-        fig_pie = px.pie(
-            procedures, 
-            values='Count', 
-            names='Procedure', 
-            title='Distribution of Services Rendered'
-        )
-        st.plotly_chart(fig_pie, use_container_width=True)
-
-
-if __name__ == "__main__":
-    pass
+# Optional: Standalone execution
+# if __name__ == "__main__":
+#     proc_etl = ProceduresETL()
+#     df_proc = proc_etl.etl()
+#     df_proc.show(5)
+#     print("Columns:", df_proc.columns)
