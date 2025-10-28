@@ -97,6 +97,7 @@ with st.sidebar:
     st.markdown("## Navigation")
     st.page_link("app.py", label="📊 Strategic & Quick Dashboard")
     st.page_link("pages/data_generation.py", label="⚙️ Data Generation")
+    st.page_link("pages/patient_demographics.py", label="👥 Patient Demographics")
 
 # ---------------- MAIN CONTENT ----------------
 st.markdown("<p class='main-title'>Strategic & Quick Dashboard</p>", unsafe_allow_html=True)
