@@ -18,9 +18,13 @@ CORS(app)
 def root():
     return jsonify({'message': 'Welcome to Synthea API'}), 200
 
+@app.route('/patients', methods=['GET'])
+def get_patients():
+    patients = patients_singleton.get_patients()
+    return jsonify(patients), 200
+
 @app.route('/generate_data/<int:num_patients>', methods=['GET'])
 def generate_data(num_patients):
-
     try:
         script = 'synthea-init.sh'
         path = '../scripts'
