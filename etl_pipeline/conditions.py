@@ -1,6 +1,6 @@
 # conditions_etl.py
 from pyspark.sql.functions import col, to_date, regexp_extract
-from etl_pipeline.master import Master
+from master import Master
 
 class ConditionsETL:
 
@@ -19,7 +19,7 @@ class ConditionsETL:
         Load the transformed conditions DataFrame from CSV if not already loaded.
         """
 
-        path="../../Datasets/csv/conditions.csv"
+        path="../Datasets/csv/conditions.csv"
         
         df = self._master._master_spark.read.csv(path, header=True, inferSchema=True)
         new_cols_list = ["event_start", "event_end", "uuid", "record_id", "_", "event_code", "event_description"]
@@ -40,3 +40,11 @@ class ConditionsETL:
 
         # Store in singleton
         self._master.setDataframes("conditions", df)
+    
+
+# Optional: Standalone execution
+# if __name__ == "__main__":
+#     conditions_etl = ConditionsETL()
+#     df_proc = conditions_etl.etl()
+#     df_proc.show(10)
+#     print("Columns:", df_proc.columns)

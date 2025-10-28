@@ -1,5 +1,5 @@
 from pyspark.sql.functions import col, regexp_extract
-from etl_pipeline.master import Master
+from master import Master
 
 class ProceduresETL:
     _proceduresetlInstance = None
@@ -21,7 +21,7 @@ class ProceduresETL:
             return self._singleton.get_dataframe("procedures")
 
         # --- Extract ---
-        path = "../../Datasets/csv/procedures.csv"
+        path = "../Datasets/csv/procedures.csv"
         spark = self._singleton.spark
         df = spark.read.csv(path, header=True, inferSchema=True)
         print("✅ Extract: Procedures data loaded")
@@ -62,5 +62,5 @@ class ProceduresETL:
 # if __name__ == "__main__":
 #     proc_etl = ProceduresETL()
 #     df_proc = proc_etl.etl()
-#     df_proc.show(5)
+#     df_proc.show(10)
 #     print("Columns:", df_proc.columns)

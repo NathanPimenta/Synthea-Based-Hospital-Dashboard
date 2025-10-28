@@ -1,6 +1,6 @@
 # patients_etl.py
 from pyspark.sql.functions import col, when, split
-from etl_pipeline.master import Master
+from master import Master
 import re
 
 class PatientsETL:
@@ -19,7 +19,7 @@ class PatientsETL:
         Load the transformed patients DataFrame from CSV if not already loaded.
         """
 
-        path="../../Datasets/csv/patients.csv"
+        path="../Datasets/csv/patients.csv"
         df = self.__master._master_spark.read.csv(path, header=True, inferSchema=True)
         print("Data is loaded")
 
@@ -52,3 +52,10 @@ class PatientsETL:
 
         # Store in singleton
         self.__master.setDataframes("patients", df)
+    
+# Optional: Standalone execution
+# if __name__ == "__main__":
+#     patients_etl = PatientsETL()
+#     df_proc = patients_etl.etl()
+#     df_proc.show(10)
+#     print("Columns:", df_proc.columns)
