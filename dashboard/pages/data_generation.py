@@ -7,22 +7,7 @@ import time
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns 
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
-
-API_URL = os.getenv("API_URL")
-
-def fetch_data(num_patients):
-    response = requests.get(f"{API_URL}/generate_data/{num_patients}")
-
-    if response.status_code == 200:
-        return response.json()
-    
-    else:
-        return None
-    
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Synthea Hospital Data Generator", layout="wide", page_icon="🏥")
 
@@ -59,7 +44,7 @@ st.markdown("""
     border-radius: 8px;
     padding: 10px 5px;
     margin: 5px 0;
-    width: 100%;
+    width: 100%; /* Ensure buttons fill their column width */
 }
 /* 4. Metric Styling */
 [data-testid="stMetricValue"] {
@@ -86,17 +71,6 @@ def handle_generation(num_patients):
     st.session_state['show_progress'] = True
     st.session_state['patients_to_generate'] = num_patients
 
-# --- DATA (Simulated for Charts) ---
-data = pd.DataFrame({
-    'State': ['MA', 'CA', 'TX', 'NY', 'FL', 'OH'],
-    'Patients': [1200, 3100, 2700, 2200, 1800, 1300]
-})
-procedures = pd.DataFrame({
-    'Procedure': ['Surgery', 'Checkup', 'Dental', 'Therapy'],
-    'Count': [1200, 5500, 2200, 3200]
-})
-
-
 # --- MAIN LAYOUT ---
 
 # ---------------- HEADER & ANIMATION ----------------
@@ -112,41 +86,51 @@ with lottie_col:
         st_lottie(lottie_data, height=100, key="data_gen_anim")
 
 
-# ---------------- PRIMARY TWO-COLUMN SPLIT ----------------
-# Left Column: Controls, Metrics | Right Column: Graphs
-left_panel, right_panel = st.columns([1, 1])
+# ---------------- MAIN INTERACTIVE ROW (Buttons vs Metrics) ----------------
+# Use a 1:1 ratio for the interactive column and the metrics column
+interactive_col, metrics_container = st.columns([1, 1])
 
-
-# --- LEFT PANEL: CONTROLS & METRICS ---
-with left_panel:
+# --- LEFT SIDE: DATA GENERATION (Buttons & Progress) ---
+with interactive_col:
     st.markdown("### 🧬 Data Generation Controls")
     patients_list = [1000, 2000, 5000, 10000, 15000]
 
-    # BUTTONS: Group into a compact 3-column layout
+    # Group buttons into a compact 3-column layout inside the left column
     button_cols = st.columns(3)
+    
+    # Place buttons sequentially across the three columns
     for i, num in enumerate(patients_list):
-        # Dynamically place buttons based on column index
-        col_index = i % 3
-        if button_cols[col_index].button(f"{num:,} Patients", key=f"btn_{num}"):
+        if i < 3:
+            col_index = i
+        else:
+            col_index = i - 3
+        
+        # Using a simple row-wise layout due to 5 buttons
+        if button_cols[col_index % 3].button(f"{num:,} Patients", key=f"btn_{num}"):
             handle_generation(num)
 
     # --- Progress Bar Simulation ---
     if 'show_progress' in st.session_state and st.session_state['show_progress']:
-        st.info(st.session_state['status_message'])
+        # Placing progress bar directly below the buttons
+        progress_text = st.empty()
         progress_bar = st.progress(0)
         
         for j in range(101):
             progress_bar.progress(j)
+            progress_text.text(f"{st.session_state['status_message']} Progress: {j}%")
             time.sleep(0.01) 
 
+        progress_text.empty()
+        progress_bar.empty()
         st.success(f"✅ Finished generating {st.session_state['patients_to_generate']:,} records.")
         st.session_state['show_progress'] = False
 
-    
-    st.markdown("---")
+
+# --- RIGHT SIDE: CURRENT DATA METRICS ---
+with metrics_container:
     st.markdown("### 📈 Current Data Metrics")
     
-    # METRICS: Display in a compact 2x2 grid
+    # Use st.columns for a compact 2x2 grid layout inside the metrics column
     m_col1, m_col2 = st.columns(2)
     m_col3, m_col4 = st.columns(2) 
 
@@ -157,14 +141,27 @@ with left_panel:
     m_col4.metric("Unique Conditions", "1,010", "▲ 1%")
 
 
-# --- RIGHT PANEL: GRAPHS & VISUAL INSIGHTS ---
-with right_panel:
-    st.markdown("### 📊 Quick Visual Insights")
+# ---------------- GRAPHS (Interactive Plotly Row) ----------------
+st.markdown("---")
+st.markdown("### 📊 Quick Visual Insights")
+
+# Example Data (Simulated)
+data = pd.DataFrame({
+    'State': ['MA', 'CA', 'TX', 'NY', 'FL', 'OH'],
+    'Patients': [1200, 3100, 2700, 2200, 1800, 1300]
+})
+procedures = pd.DataFrame({
+    'Procedure': ['Surgery', 'Checkup', 'Dental', 'Therapy'],
+    'Count': [1200, 5500, 2200, 3200]
+})
+
+
+with st.expander("Expand to view Analytical Charts"):
     
-    # Use st.expander for a clean start to the visualization section
-    with st.expander("Analytical Charts", expanded=True):
-        
-        # Plotly Bar Chart
+    graph_col1, graph_col2 = st.columns(2)
+
+    # Plotly Bar Chart
+    with graph_col1:
         st.subheader("Patients per State (Utilization)")
         fig_bar = px.bar(
             data, 
@@ -175,9 +172,8 @@ with right_panel:
         )
         st.plotly_chart(fig_bar, use_container_width=True)
 
-        st.markdown("---") # Separator between graphs
-
-        # Plotly Pie Chart
+    # Plotly Pie Chart
+    with graph_col2:
         st.subheader("Procedures Breakdown")
         fig_pie = px.pie(
             procedures, 
@@ -186,7 +182,6 @@ with right_panel:
             title='Distribution of Services Rendered'
         )
         st.plotly_chart(fig_pie, use_container_width=True)
-
 
 if __name__ == "__main__":
     pass
