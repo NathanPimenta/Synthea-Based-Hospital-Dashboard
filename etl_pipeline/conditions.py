@@ -1,6 +1,6 @@
 # conditions_etl.py
 from pyspark.sql.functions import col, to_date, regexp_extract
-from master import Master
+from etl_pipeline.master import Master
 
 class ConditionsETL:
 
@@ -40,11 +40,12 @@ class ConditionsETL:
 
         # Store in singleton
         self._master.setDataframes("conditions", df)
+        # return df
     
 
 # Optional: Standalone execution
 # if __name__ == "__main__":
 #     conditions_etl = ConditionsETL()
 #     df_proc = conditions_etl.etl()
-#     df_proc.show(10)
+#     df_proc.show(25)
 #     print("Columns:", df_proc.columns)

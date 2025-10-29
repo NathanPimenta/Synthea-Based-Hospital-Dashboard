@@ -1,6 +1,6 @@
 # patients_etl.py
 from pyspark.sql.functions import col, when, split
-from master import Master
+from etl_pipeline.master import Master
 import re
 
 class PatientsETL:
@@ -23,17 +23,17 @@ class PatientsETL:
         df = self.__master._master_spark.read.csv(path, header=True, inferSchema=True)
         print("Data is loaded")
 
-        # Drop unwanted columns
-        df = df.drop("_c10", "_c12","Pittsfield  Massachusetts  US", "Middlesex County")
 
         # Rename columns
         new_cols_list = ["uuid", "birth_date", "death_date", "social_security_number", "driver's_license_number", 
                          "passport_number", "salutation", "first_name", "middle_name", "last_name", "maiden_family",
-                         "skin_color", "ancestry", "gender", "address", "city", "state", "postal_code", "latitude",
+                         "skin_color", "_", "ancestry", "gender", "address", "_", "city", "state", "postal_code", "_", "_", "latitude",
                          "longitude", "family_income"]
 
         for old_col, new_col in zip(df.columns, new_cols_list):
             df = df.withColumnRenamed(old_col, new_col)
+        
+        df = df.drop(*[col for col in df.columns if col.startswith("_")])
 
         # Drop numeric-looking column names
         re_patterns = [r'^[-]?[0-9]+.[0-9]+$', r'[0-9]+$']

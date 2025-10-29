@@ -1,5 +1,5 @@
 from pyspark.sql.functions import col, regexp_extract
-from master import Master
+from etl_pipeline.master import Master
 
 class ProceduresETL:
     _proceduresetlInstance = None
@@ -16,13 +16,13 @@ class ProceduresETL:
         Unified Extract–Transform–Load function for procedures data.
         """
         # ✅ Check cache — no reprocessing if already loaded
-        if self._singleton.get_dataframe("procedures"):
+        if self._master.getDataframes("procedures"):
             print("Procedures dataframe already loaded in singleton cache.")
-            return self._singleton.get_dataframe("procedures")
+            return self._master.getDataframes("procedures")
 
         # --- Extract ---
         path = "../Datasets/csv/procedures.csv"
-        spark = self._singleton.spark
+        spark = self._master._master_spark
         df = spark.read.csv(path, header=True, inferSchema=True)
         print("✅ Extract: Procedures data loaded")
 
@@ -52,15 +52,15 @@ class ProceduresETL:
         print("✅ Transform: Procedures columns cleaned and enriched")
 
         # --- Load ---
-        self._master.set_dataframe("procedures", df)
+        self._master.setDataframes("procedures", df)
         print("✅ Load: Procedures dataframe stored in ETLSingleton")
 
-        return df
+        # return df
 
 
 # Optional: Standalone execution
 # if __name__ == "__main__":
 #     proc_etl = ProceduresETL()
 #     df_proc = proc_etl.etl()
-#     df_proc.show(10)
+#     df_proc.show(25)
 #     print("Columns:", df_proc.columns)

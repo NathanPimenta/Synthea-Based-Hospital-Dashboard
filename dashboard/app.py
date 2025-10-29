@@ -2,13 +2,42 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import numpy as np
+import requests
 
 # ---------------- CONFIGURATION ----------------
 st.set_page_config(
-    page_title="🏥 Main Dashboard",
+    page_title="Main Dashboard",
     layout="wide",
     page_icon="🏥"
 )
+
+API_URL = "http://localhost:3001/quick_dashboard"
+
+# ---------------- FETCH DATA FROM API ----------------
+@st.cache_data(ttl=600)
+def load_data():
+    """Fetch Spark patient data via Flask API."""
+    try:
+        response = requests.get(API_URL)
+        if response.status_code == 200:
+            json_data = response.json()
+            if json_data.get("api-status") == "successs":
+                data = json_data.get("data", [])
+                if data:
+                    df = pd.DataFrame(data)
+
+                    # ✅ Fix negative or invalid family income values
+                    if "family_income" in df.columns:
+                        df["family_income"] = pd.to_numeric(df["family_income"], errors="coerce").abs().fillna(0)
+
+                    return df
+        st.warning("⚠️ No data returned from API or data format invalid.")
+        return pd.DataFrame()
+    except Exception as e:
+        st.error(f"❌ Error fetching data from API: {e}")
+        return pd.DataFrame()
+
+df = load_data()
 
 # ---------------- CUSTOM CSS ----------------
 st.markdown("""
@@ -98,130 +127,152 @@ with st.sidebar:
     st.page_link("app.py", label="📊 Strategic & Quick Dashboard")
     st.page_link("pages/data_generation.py", label="⚙️ Data Generation")
     st.page_link("pages/patient_demographics.py", label="👥 Patient Demographics")
+    st.page_link("pages/conditions_dashboard.py", label="🩺 Conditions Dashboard")
+    st.page_link("pages/procedures_dashboard.py", label="⚕️ Procedures Dashboard")
 
 # ---------------- MAIN CONTENT ----------------
 st.markdown("<p class='main-title'>Strategic & Quick Dashboard</p>", unsafe_allow_html=True)
 st.markdown("<p class='main-subtitle'>Real-time analytics for patient engagement and hospital performance.</p>", unsafe_allow_html=True)
 st.markdown("---")
 
-# ---------------- KPIs ----------------
+# ---------------- KPI SECTION ----------------
+if not df.empty:
+    total_patients = len(df)
+    avg_income = df["family_income"].mean() if "family_income" in df.columns else 0
+    unique_cities = df["city"].nunique() if "city" in df.columns else 0
+    unique_genders = df["gender"].nunique() if "gender" in df.columns else 0
+else:
+    total_patients = avg_income = unique_cities = unique_genders = 0
+
 st.markdown("### 📈 Core Performance Indicators")
 k1, k2, k3, k4 = st.columns(4)
-with k1: st.metric(label="Encounters This Week", value="2,145", delta="▲ 12%")
-with k2: st.metric(label="Avg. Procedure Cost", value="$455.50", delta="▼ 1.5%", delta_color="inverse")
-with k3: st.metric(label="Active Patients (30 days)", value="12,500", delta="▲ 2%")
-with k4: 
-    st.metric(label="Top Condition", value="Allergy", delta="▲ 1.5%")
+with k1:
+    st.metric(label="Total Patients", value=f"{total_patients:,}")
+with k2:
+    st.metric(label="Average Family Income", value=f"${avg_income:,.2f}")
+with k3:
+    st.metric(label="Unique Cities", value=f"{unique_cities}")
+with k4:
+    st.metric(label="Unique Genders", value=f"{unique_genders}")
 
-# ---------------- CHARTS: UTILIZATION ----------------
-st.markdown("### 📊 Utilization & Demographic Overview")
+# ---------------- DEMOGRAPHIC OVERVIEW ----------------
+st.markdown("### 📊 Demographic Insights")
 c1, c2 = st.columns(2)
 
-# --- Patient Volume Trend ---
-with c1:
-    df = pd.DataFrame({
-        "Week": ["W1", "W2", "W3", "W4", "W5"],
-        "Encounters": [1450, 1600, 1750, 1950, 2145]
-    })
-    fig = px.line(df, x="Week", y="Encounters", title="Weekly Patient Volume Trend", markers=True)
-    fig.update_traces(line=dict(color="#4DB6AC", width=3), marker=dict(size=8, color="#81D4FA"))
-    fig.update_layout(
-        template="plotly_dark",
-        height=280,
-        margin=dict(l=30, r=30, t=50, b=20),
-        plot_bgcolor="#0f0f0f",
-        paper_bgcolor="#0f0f0f",
-        font=dict(color="#E0E0E0"),
-        title_x=0.5
+# --- Gender Distribution ---
+if not df.empty and "gender" in df.columns:
+    gender_counts = df["gender"].value_counts().reset_index()
+    gender_counts.columns = ["Gender", "Count"]
+    fig_g = px.pie(
+        gender_counts,
+        names="Gender",
+        values="Count",
+        title="Gender Distribution",
+        color_discrete_sequence=px.colors.sequential.Tealgrn
     )
-    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-
-# --- Condition Trend ---
-with c2:
-    df2 = pd.DataFrame({
-        "Condition": ["Allergy", "Injury", "Chronic", "Other"],
-        "Count": [320, 210, 150, 80]
-    })
-    fig2 = px.bar(df2, x="Condition", y="Count", title="Top Reported Conditions",
-                  color="Condition", color_discrete_sequence=px.colors.sequential.Teal)
-    fig2.update_traces(marker_line_width=0.5, marker_line_color="#222")
-    fig2.update_layout(
-        template="plotly_dark",
-        height=280,
-        margin=dict(l=30, r=30, t=50, b=20),
-        plot_bgcolor="#0f0f0f",
-        paper_bgcolor="#0f0f0f",
-        font=dict(color="#E0E0E0"),
-        title_x=0.5
-    )
-    st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
-
-# ---------------- DEMOGRAPHIC INSIGHTS ----------------
-st.markdown("### 🌍 Interactive Demographic Insights")
-
-# ---- ROW 1: Gender & Age Distribution ----
-col1, col2 = st.columns(2)
-
-with col1:
-    gender_data = pd.DataFrame({
-        "Gender": ["Male", "Female", "Other"],
-        "Count": [5200, 4800, 150]
-    })
-    fig_g = px.pie(gender_data, names="Gender", values="Count", title="Gender Distribution",
-                   color_discrete_sequence=px.colors.sequential.Tealgrn)
-    fig_g.update_traces(textinfo='percent+label', pull=[0.05, 0, 0])
+    fig_g.update_traces(textinfo='percent+label')
     fig_g.update_layout(template="plotly_dark", height=320, title_x=0.5)
-    st.plotly_chart(fig_g, use_container_width=True, config={"displayModeBar": False})
+    with c1:
+        st.plotly_chart(fig_g, use_container_width=True, config={"displayModeBar": False})
+else:
+    st.warning("⚠️ Gender data not available.")
 
-with col2:
-    ages = np.random.normal(40, 15, 1000)
-    fig_age = px.histogram(pd.DataFrame({"Age": ages}), x="Age", nbins=20,
-                           title="Age Distribution", color_discrete_sequence=["#4DB6AC"])
-    fig_age.update_traces(marker_line_width=0.2)
-    fig_age.update_layout(template="plotly_dark", height=320, title_x=0.5,
-                          plot_bgcolor="#0f0f0f", paper_bgcolor="#0f0f0f")
-    st.plotly_chart(fig_age, use_container_width=True, config={"displayModeBar": False})
+# --- Top Cities ---
+if not df.empty and "city" in df.columns:
+    city_counts = df["city"].value_counts().nlargest(10).reset_index()
+    city_counts.columns = ["City", "Patients"]
+    fig_c = px.bar(
+        city_counts,
+        x="City",
+        y="Patients",
+        title="Top 10 Cities by Patient Count",
+        color="City",
+        color_discrete_sequence=px.colors.qualitative.Prism
+    )
+    fig_c.update_layout(template="plotly_dark", height=320, title_x=0.5)
+    with c2:
+        st.plotly_chart(fig_c, use_container_width=True, config={"displayModeBar": False})
 
-# ---- ROW 2: City & Income ----
-col3, col4 = st.columns(2)
-
-with col3:
-    cities = ["Boston", "Lowell", "Worcester", "Cambridge", "Springfield"]
-    city_counts = [3500, 1800, 1500, 1200, 900]
-    df_city = pd.DataFrame({"City": cities, "Patients": city_counts})
-    fig_city = px.bar(df_city, x="City", y="Patients", title="Patients by City",
-                      color="City", color_discrete_sequence=px.colors.qualitative.Prism)
-    fig_city.update_traces(marker_line_width=0.5, marker_line_color="#111")
-    fig_city.update_layout(template="plotly_dark", height=320, title_x=0.5)
-    st.plotly_chart(fig_city, use_container_width=True, config={"displayModeBar": False})
-
-with col4:
-    df_income = pd.DataFrame({
-        "Income Range": ["<25k", "25k-50k", "50k-75k", "75k-100k", "100k+"],
-        "Patients": [1200, 2400, 3100, 1800, 650]
-    })
-    fig_income = px.area(df_income, x="Income Range", y="Patients", title="Patients by Family Income",
-                         color_discrete_sequence=["#64B5F6"])
-    fig_income.update_traces(line=dict(width=3))
-    fig_income.update_layout(template="plotly_dark", height=320, title_x=0.5,
-                             plot_bgcolor="#0f0f0f", paper_bgcolor="#0f0f0f")
-    st.plotly_chart(fig_income, use_container_width=True, config={"displayModeBar": False})
-
-# ---- ROW 3: Race & Geo Distribution ----
-col5, col6 = st.columns(2)
-
-with col5:
-    df_ethnicity = pd.DataFrame({
-        "Ethnicity": ["White", "Black", "Hispanic", "Asian", "Other"],
-        "Count": [4500, 2200, 1800, 900, 300]
-    })
-    fig_eth = px.bar(df_ethnicity, x="Ethnicity", y="Count", title="Ethnicity Breakdown",
-                     color="Ethnicity", color_discrete_sequence=px.colors.qualitative.Vivid)
+# --- Ethnicity / Ancestry ---
+if not df.empty and "ancestry" in df.columns:
+    ancestry_counts = df["ancestry"].value_counts().nlargest(10).reset_index()
+    ancestry_counts.columns = ["Ancestry", "Count"]
+    fig_eth = px.bar(
+        ancestry_counts,
+        x="Ancestry",
+        y="Count",
+        title="Ancestry Distribution",
+        color="Ancestry",
+        color_discrete_sequence=px.colors.qualitative.Vivid
+    )
     fig_eth.update_layout(template="plotly_dark", height=320, title_x=0.5)
     st.plotly_chart(fig_eth, use_container_width=True, config={"displayModeBar": False})
 
-with col6:
-    pass
+# ---------------- NEW DECISIVE GRAPHS ----------------
+st.markdown("### 📉 Advanced Insights")
+
+if not df.empty:
+    a1, a2 = st.columns(2)
+
+    # --- Family Income Distribution ---
+    with a1:
+        if "family_income" in df.columns:
+            fig_income = px.histogram(
+                df,
+                x="family_income",
+                nbins=30,
+                title="Family Income Distribution",
+                color_discrete_sequence=["#4DB6AC"]
+            )
+            fig_income.update_layout(template="plotly_dark", height=320, title_x=0.5)
+            st.plotly_chart(fig_income, use_container_width=True, config={"displayModeBar": False})
+
+    # --- Age vs Income Correlation ---
+    with a2:
+        if "age" in df.columns and "family_income" in df.columns:
+            fig_age_income = px.scatter(
+                df,
+                x="age",
+                y="family_income",
+                title="Age vs Family Income Correlation",
+                color="gender" if "gender" in df.columns else None,
+                color_discrete_sequence=px.colors.qualitative.Safe,
+                opacity=0.7
+            )
+            fig_age_income.update_layout(template="plotly_dark", height=320, title_x=0.5)
+            st.plotly_chart(fig_age_income, use_container_width=True, config={"displayModeBar": False})
+
+    b1, b2 = st.columns(2)
+
+    # --- Gender-wise Average Income ---
+    with b1:
+        if "gender" in df.columns and "family_income" in df.columns:
+            avg_by_gender = df.groupby("gender")["family_income"].mean().reset_index()
+            fig_gi = px.bar(
+                avg_by_gender,
+                x="gender",
+                y="family_income",
+                title="Average Family Income by Gender",
+                color="gender",
+                color_discrete_sequence=px.colors.qualitative.Set2
+            )
+            fig_gi.update_layout(template="plotly_dark", height=320, title_x=0.5)
+            st.plotly_chart(fig_gi, use_container_width=True, config={"displayModeBar": False})
+
+    # --- City-wise Average Income (Treemap) ---
+    with b2:
+        if "city" in df.columns and "family_income" in df.columns:
+            city_avg = df.groupby("city")["family_income"].mean().nlargest(20).reset_index()
+            fig_t = px.treemap(
+                city_avg,
+                path=["city"],
+                values="family_income",
+                title="City-wise Average Income (Top 20)",
+                color="family_income",
+                color_continuous_scale="Tealgrn"
+            )
+            fig_t.update_layout(template="plotly_dark", height=320, title_x=0.5)
+            st.plotly_chart(fig_t, use_container_width=True, config={"displayModeBar": False})
 
 # ---------------- FOOTER ----------------
 st.markdown("---")
